@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>CCNA 1 Trainer</title>
+<style>
+:root{
+  --bg:#000; --s1:#161617; --s2:#1d1d1f; --s3:#2c2c2e; --line:rgba(255,255,255,.12);
+  --tx:#f5f5f7; --tx2:#a1a1a6; --tx3:#8e8e93;
+  --blue:#2997ff; --btn:#0071e3; --ok:#30d158; --bad:#ff453a; --warn:#ffd60a;
+  --r:22px; --c:#2997ff;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.47 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.011em}
+button,input{font:inherit;color:inherit;letter-spacing:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px 96px}
+.narrow{max-width:760px;margin:0 auto}
+
+/* nav */
+.nav{position:sticky;top:10px;z-index:20;max-width:1080px;margin:10px auto 0;padding:0 12px}
+.nav-in{display:flex;align-items:center;gap:6px;background:rgba(29,29,31,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-radius:999px;padding:6px 6px 6px 20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.brand{font-weight:600;font-size:17px;white-space:nowrap;background:none;border:0;padding:8px 0;margin-right:auto}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:0;border-radius:999px;padding:9px 14px;font-size:14px;color:var(--tx2);white-space:nowrap;min-height:40px}
+.tab:hover{color:var(--tx)}
+.tab.on{background:var(--s3);color:var(--tx)}
+
+/* type */
+.eyebrow{font-size:17px;font-weight:600;color:var(--tx2)}
+.hero{padding:72px 0 36px}
+.hero h1{font-size:clamp(46px,9vw,96px);line-height:1.02;font-weight:600;letter-spacing:-.04em;margin-top:6px}
+.hero .sub{font-size:clamp(19px,2.4vw,24px);color:var(--tx2);margin-top:18px;max-width:640px;line-height:1.3}
+.h2{font-size:clamp(30px,4.6vw,48px);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:64px 0 22px}
+.h3{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.muted{color:var(--tx2)} .small{font-size:14px} .tiny{font-size:12px;color:var(--tx3)}
+
+/* buttons */
+.btn{appearance:none;border:0;border-radius:999px;padding:11px 22px;font-size:17px;font-weight:500;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;white-space:nowrap}
+.btn.primary{background:var(--btn);color:#fff}
+.btn.primary:hover{background:#0a7cf0}
+.btn.ghost{background:transparent;color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.btn.ghost:hover{background:rgba(41,151,255,.12)}
+.btn.dark{background:var(--s3);color:var(--tx)}
+.btn.dark:hover{background:#3a3a3c}
+.btn.sm{font-size:14px;padding:8px 16px;min-height:36px}
+.btn:disabled{opacity:.35;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.spread{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.link{background:none;border:0;padding:0;color:var(--blue);font-size:inherit}
+.link:hover{text-decoration:underline}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:44px;text-align:center}
+.stat .n{font-size:clamp(40px,7vw,64px);font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.stat .l{font-size:14px;color:var(--tx2)}
+.bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--s3);margin-top:28px}
+.bar i{display:block;height:100%}
+.bar .k{background:var(--ok)} .bar .s{background:var(--warn)}
+.bar.thin{height:6px;margin-top:14px}
+
+/* cards */
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card{background:var(--s1);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card.tool{min-height:190px;justify-content:space-between;text-align:left;border:0;color:var(--tx);transition:background .2s}
+.card.tool:hover{background:var(--s2)}
+.card.tool .go{color:var(--blue);font-size:17px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none;display:inline-block}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border-radius:999px;padding:5px 12px;border:0}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 10px;background:var(--s3);color:var(--tx2);white-space:nowrap}
+.pill.known{color:var(--ok);background:rgba(48,209,88,.14)}
+.pill.shaky{color:var(--warn);background:rgba(255,214,10,.14)}
+.tcard .name{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:600;letter-spacing:-.02em}
+.tcard .tfoot{margin-top:14px}
+
+/* session */
+.sess{padding-top:36px}
+.shead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.shead .sp{margin-left:auto;display:flex;gap:8px;align-items:center}
+.prog{height:4px;background:var(--s3);border-radius:9px;overflow:hidden;margin:6px 0 34px}
+.prog i{display:block;height:100%;background:var(--c);border-radius:9px;transition:width .3s}
+.q{font-size:clamp(24px,3.4vw,34px);font-weight:600;letter-spacing:-.025em;line-height:1.18;white-space:pre-wrap}
+.hint{color:var(--tx2);margin-top:10px;font-size:15px}
+.opts{display:flex;flex-direction:column;gap:10px;margin:28px 0 22px}
+.opt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:var(--s1);border:1.5px solid transparent;border-radius:16px;padding:15px 18px;color:var(--tx);min-height:56px;transition:background .15s,border-color .15s}
+.opt:not(:disabled):hover{background:var(--s2)}
+.opt:disabled{cursor:default}
+.opt .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--s3);display:grid;place-items:center;font-size:13px;font-weight:600;color:var(--tx2)}
+.opt .t{flex:1;min-width:0;overflow-wrap:anywhere;padding-top:1px}
+.opt .tag{flex:none;font-size:12px;font-weight:600;padding-top:5px}
+.opt.sel{border-color:var(--blue);background:rgba(41,151,255,.1)}
+.opt.sel .k{background:var(--blue);color:#fff}
+.opt.ok{border-color:var(--ok);background:rgba(48,209,88,.1)}
+.opt.ok .k{background:var(--ok);color:#000}
+.opt.ok .tag{color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:rgba(255,69,58,.1)}
+.opt.bad .k{background:var(--bad);color:#fff}
+.opt.bad .tag{color:var(--bad)}
+.opt.miss{border-style:dashed}
+.why{border-radius:16px;background:var(--s1);padding:18px 20px;margin-bottom:22px;box-shadow:inset 3px 0 0 0 transparent}
+.why b{display:block;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--c);margin-bottom:4px}
+.verdict{font-size:21px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+.ico{width:22px;height:22px;flex:none}
+.opt .k .ico{width:16px;height:16px}
+.page>.h2:first-child{margin-top:44px}
+.star{background:none;border:0;padding:8px;border-radius:50%;color:var(--tx3);display:grid;place-items:center;min-width:40px;min-height:40px}
+.star.on{color:var(--warn)}
+.star:hover{background:var(--s2)}
+.qimg{max-width:100%;border-radius:12px;margin-top:18px;background:#fff}
+.center{text-align:center}
+.big{font-size:clamp(64px,14vw,128px);font-weight:600;letter-spacing:-.04em;line-height:1}
+
+/* exam */
+.timer{font-variant-numeric:tabular-nums;font-weight:600;font-size:17px}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:6px;margin-top:28px}
+.pal button{height:40px;border-radius:10px;border:0;background:var(--s1);color:var(--tx2);font-size:14px;font-variant-numeric:tabular-nums}
+.pal button.done{background:var(--s3);color:var(--tx)}
+.pal button.cur{box-shadow:inset 0 0 0 1.5px var(--blue);color:var(--tx)}
+.seg{display:inline-flex;background:var(--s1);border-radius:999px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:none;color:var(--tx2);border-radius:999px;padding:8px 16px;font-size:15px;min-height:38px}
+.seg button.on{background:var(--s3);color:var(--tx)}
+
+/* lists, tables, forms */
+.field{width:100%;background:var(--s1);border:1.5px solid transparent;border-radius:14px;padding:13px 16px;font-size:17px;color:var(--tx);min-height:48px}
+.field::placeholder{color:var(--tx3)}
+.field:focus{outline:none;border-color:var(--blue)}
+.field.ok{border-color:var(--ok)} .field.bad{border-color:var(--bad)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 22px}
+.fchip{border:0;border-radius:999px;padding:7px 14px;font-size:14px;background:var(--s1);color:var(--tx2);display:inline-flex;gap:8px;align-items:center;min-height:36px}
+.fchip.on{background:var(--tx);color:#000}
+.item{background:var(--s1);border-radius:16px;margin-bottom:8px;overflow:hidden}
+.item>button.head{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;padding:15px 18px;color:var(--tx);min-height:56px}
+.item>button.head .t{flex:1;min-width:0}
+.item .body{padding:0 18px 18px 40px}
+.item .body ul{margin:0 0 12px;padding:0;list-style:none}
+.item .body li{padding:3px 0;color:var(--tx2)}
+.item .body li.ok{color:var(--ok);font-weight:500}
+.tblbox{overflow-x:auto;border-radius:16px;background:var(--s1)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:11px 16px;vertical-align:top}
+th{font-size:12px;font-weight:600;color:var(--tx2);letter-spacing:.02em;white-space:nowrap}
+tr+tr td{border-top:1px solid var(--line)}
+tbody tr:first-child td{border-top:1px solid var(--line)}
+td:first-child{font-weight:600;color:var(--c);white-space:nowrap}
+.sheet{scroll-margin-top:90px;margin-bottom:44px}
+.sheet .note{color:var(--tx2);margin:6px 0 16px;max-width:760px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:26px 0}
+.fgrid label{display:block;font-size:14px;color:var(--tx2);margin-bottom:6px}
+.fgrid .sol{font-size:14px;margin-top:6px;min-height:20px}
+.fgrid .sol.ok{color:var(--ok)} .fgrid .sol.bad{color:var(--bad)}
+.task{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.1}
+.steps{margin:0;padding-left:22px;color:var(--tx2)}
+.steps li{margin:6px 0}
+.steps code,code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.92em;color:var(--tx)}
+.paste{border:1.5px dashed rgba(255,255,255,.28);border-radius:var(--r);padding:44px 24px;text-align:center;color:var(--tx2);min-height:160px;display:grid;place-items:center}
+.paste:focus{outline:none;border-color:var(--blue);color:var(--tx)}
+.foot{margin-top:72px;padding-top:22px;border-top:1px solid var(--line);color:var(--tx3);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 16px 72px}
+  .hero{padding:44px 0 24px}
+  .brand{display:none}
+  .nav-in{padding-left:6px}
+  .item .body{padding-left:18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="nav-in"><button class="brand" id="brand">CCNA 1 Trainer</button><nav class="tabs" id="tabs" aria-label="Sections"></nav></div></header>
+<main class="wrap" id="app"></main>
+<script>
+/* Question bank: [topic, question, number of correct options (listed first), options, German explanation] */
+const BANK = [
+/* ───────── Models & basics ───────── */
+['mod','Which OSI layer handles logical addressing and chooses the path a packet takes to its destination?',1,['Network layer','Data link layer','Transport layer','Session layer'],'Schicht 3 (Network) vergibt logische Adressen (IP-Adressen) und leitet Pakete von Netz zu Netz weiter (Routing).'],
+['mod','What is the name of the PDU at the transport layer?',1,['Segment','Packet','Frame','Bits'],'Merke von oben nach unten: Data → Segment (Transport) → Packet (Network) → Frame (Data Link) → Bits (Physical).'],
+['mod','What is the name of the PDU at the data link layer?',1,['Frame','Packet','Segment','Datagram'],'Auf Schicht 2 heißt die Dateneinheit Frame. Ein Frame verpackt ein Packet und bekommt MAC-Adressen und eine Prüfsumme.'],
+['mod','Which three OSI layers are combined in the application layer of the TCP/IP model? (Choose three.)',3,['Application','Presentation','Session','Transport','Network','Data link'],'Das TCP/IP-Modell fasst die OSI-Schichten 5, 6 und 7 (Session, Presentation, Application) zu einer Application-Schicht zusammen.'],
+['mod','Which two OSI layers correspond to the network access layer of the TCP/IP model? (Choose two.)',2,['Data link','Physical','Network','Transport','Session'],'Network Access im TCP/IP-Modell = OSI-Schicht 1 (Physical) + Schicht 2 (Data Link).'],
+['mod','What is the process called in which each layer adds its own header to the data on the way down the protocol stack?',1,['Encapsulation','Decapsulation','Multiplexing','Segmentation'],'Encapsulation = Einpacken: jede Schicht setzt ihren Header davor. Beim Empfänger wird in umgekehrter Reihenfolge ausgepackt (Decapsulation).'],
+['mod','A packet travels through several routers to a host in another network (no NAT). Which addresses stay the same the whole way?',1,['The source and destination IP addresses','The source and destination MAC addresses','Only the source MAC address','Only the destination MAC address'],'IP-Adressen gelten Ende-zu-Ende und bleiben gleich. MAC-Adressen gelten nur für einen Abschnitt und werden an jedem Router neu gesetzt.'],
+['mod','A host sends a packet to a device in a different network. Which destination MAC address does it put in the frame?',1,['The MAC address of its default gateway','The MAC address of the destination host','The broadcast MAC address','The MAC address of the nearest switch'],'Für fremde Netze geht der Frame an den Router (Default Gateway). Deshalb steht dessen MAC-Adresse als Ziel im Frame, die Ziel-IP bleibt der entfernte Host.'],
+['mod','What are two benefits of using a layered network model? (Choose two.)',2,['Products from different vendors can work together','A change in one layer does not affect the other layers','All devices are forced to run at the same speed','No physical addresses are needed any more','Networks no longer need security'],'Schichtenmodelle definieren klare Schnittstellen: Hersteller können kompatible Produkte bauen und Technik einer Schicht kann sich ändern, ohne die anderen zu stören.'],
+['mod','Which mechanism prevents a fast sender from overwhelming a slow receiver?',1,['Flow control','Encapsulation','Response timeout','Message encoding'],'Flow control regelt, wie viel Daten in welchem Tempo gesendet werden dürfen, damit der Empfänger nicht überläuft.'],
+['mod','Which delivery method sends a message from one host to all other hosts in the same network?',1,['Broadcast','Unicast','Multicast','Anycast'],'Unicast = einer an einen, Multicast = einer an eine Gruppe, Broadcast = einer an alle im Netz.'],
+['mod','Which delivery method sends a message from one host to a selected group of hosts?',1,['Multicast','Broadcast','Unicast','Simplex'],'Multicast erreicht nur die Geräte, die zu einer bestimmten Gruppe gehören, nicht alle.'],
+['mod','What is an intranet?',1,['A private network that is only accessible to members of the organization','A public network that anyone on the Internet can reach','A network that connects a company with its suppliers and customers','A network that only consists of wireless devices'],'Intranet = internes, privates Netz einer Organisation. Ein Extranet öffnet einen Teil davon kontrolliert für Partner oder Lieferanten.'],
+['mod','Which characteristic describes a network that can grow to support new users and applications without hurting performance for existing users?',1,['Scalability','Fault tolerance','Quality of service','Security'],'Scalability = Erweiterbarkeit. Die vier Merkmale zuverlässiger Netze sind Fault tolerance, Scalability, QoS und Security.'],
+['mod','A network has redundant paths so that a failed link affects as few devices as possible. Which characteristic is this?',1,['Fault tolerance','Scalability','Quality of service','Integrity'],'Fault tolerance = Ausfallsicherheit durch Redundanz. Fällt ein Weg aus, läuft der Verkehr über einen anderen.'],
+['mod','Which mechanism gives voice and video traffic priority over less time-critical traffic when the network is congested?',1,['Quality of service (QoS)','Fault tolerance','Scalability','Encapsulation'],'QoS priorisiert zeitkritische Daten wie Sprache und Video, wenn nicht genug Bandbreite für alles da ist.'],
+['mod','Employees may use their own laptops and phones to access company resources. What is this trend called?',1,['BYOD','Cloud computing','Powerline networking','Video conferencing'],'BYOD = Bring Your Own Device: private Geräte werden im Firmennetz genutzt.'],
+['mod','Which type of network covers a small area such as one building and is usually managed by a single organization?',1,['LAN','WAN','Internet','Extranet'],'LAN = Local Area Network (klein, schnell, ein Betreiber). Ein WAN verbindet LANs über große Entfernungen.'],
+['mod','Which organization is responsible for the Ethernet and wireless LAN standards (802.3 and 802.11)?',1,['IEEE','IETF','IANA','ICANN'],'IEEE macht die 802-Standards. Die IETF entwickelt Internet-Protokolle (RFCs), die IANA verwaltet IP-Adressen und Portnummern.'],
+['mod','What are two functions of intermediary devices such as switches and routers? (Choose two.)',2,['They regenerate and retransmit signals','They choose another path when a link fails','They are the original source of user data','They run the applications that users work with','They store user files permanently'],'Zwischengeräte leiten Daten weiter: Signale auffrischen, Wege wählen, Fehler melden. Daten erzeugen und empfangen tun die Endgeräte.'],
+['mod','Which Internet access technology uses the existing telephone line and allows phone calls at the same time?',1,['DSL','Cable','Satellite','Dial-up'],'DSL nutzt die Telefonleitung auf anderen Frequenzen als das Telefon. Cable nutzt das Koaxialkabel des Fernsehanbieters.'],
+['mod','What is a converged network?',1,['One network that carries data, voice and video over the same infrastructure','A network that only uses fiber-optic cables','A network without any intermediary devices','Separate networks for telephone, TV and computers'],'Konvergent = zusammengeführt: Daten, Telefonie und Video laufen über dasselbe Netz mit denselben Regeln.'],
+['mod','Which security goal makes sure that data has not been changed on its way from sender to receiver?',1,['Integrity','Confidentiality','Availability','Scalability'],'Die drei Schutzziele: Confidentiality (nur Berechtigte lesen), Integrity (nichts wurde verändert), Availability (Dienst ist erreichbar).'],
+['mod','What are two advantages of splitting data into segments before sending it? (Choose two.)',2,['Many conversations can share the same link (multiplexing)','Only the lost piece has to be sent again','The data no longer needs addresses','The receiver does not have to reassemble anything','Segments travel faster than the speed of the medium'],'Segmentierung erlaubt Multiplexing (viele Gespräche gleichzeitig) und spart Zeit bei Fehlern, weil nur das fehlende Stück wiederholt wird.'],
+['mod','Which information is added to the data at the transport layer?',1,['Source and destination port numbers','Source and destination IP addresses','Source and destination MAC addresses','The frame check sequence'],'Ports gehören zu Schicht 4, IP-Adressen zu Schicht 3, MAC-Adressen und FCS zu Schicht 2.'],
+['mod','Which networking technology uses the electrical wiring of a building to connect devices?',1,['Powerline networking','DSL','Cellular','Fiber to the home'],'Powerline schickt Daten über die Stromleitung, praktisch dort, wo kein Netzwerkkabel und kein gutes WLAN vorhanden ist.'],
+
+/* ───────── Physical layer & cabling ───────── */
+['phy','What is the job of the physical layer?',1,['To send the bits of a frame across the medium as signals','To choose the best path to the destination','To check frames for errors','To set up sessions between applications'],'Schicht 1 wandelt Bits in Signale um: elektrisch (Kupfer), Licht (Glasfaser) oder Funk (Wireless).'],
+['phy','Which cable is normally used to connect a PC to a switch?',1,['Straight-through UTP cable','Crossover UTP cable','Rollover cable','Coaxial cable'],'Unterschiedliche Geräte (PC–Switch, Switch–Router) = straight-through. Gleiche Geräte (Switch–Switch, PC–PC) = crossover.'],
+['phy','Which cable connects the serial port of a PC to the console port of a Cisco router or switch?',1,['Rollover (console) cable','Crossover cable','Straight-through cable','Fiber patch cable'],'Das Rollover-Kabel (Konsolenkabel) dient nur zur Verwaltung über den Console-Port, nicht zur Datenübertragung im Netz.'],
+['phy','Why are the wire pairs in a UTP cable twisted?',1,['To cancel out crosstalk and electromagnetic interference','To make the cable more flexible','To increase the maximum cable length to several kilometres','To carry light signals'],'Durch das Verdrillen heben sich Störfelder gegenseitig auf. So wird Übersprechen (Crosstalk) zwischen den Paaren reduziert.'],
+['phy','What are two advantages of fiber-optic cable over copper cable? (Choose two.)',2,['It is immune to EMI and RFI','It can carry signals over much longer distances','It is cheaper to install','It is easier to terminate','It can supply power to devices'],'Glasfaser überträgt Licht: keine elektromagnetischen Störungen, große Distanzen, hohe Bandbreite. Nachteil: teurer und aufwendiger.'],
+['phy','Which statement about single-mode fiber is true?',1,['It uses a laser and is suited for long distances','It uses LEDs and is suited for short distances only','It has a larger core than multimode fiber','It carries electrical signals'],'Single-mode: sehr dünner Kern, Laser, viele Kilometer. Multimode: dickerer Kern, LED, kürzere Strecken (z. B. im Gebäude).'],
+['phy','Which term describes the amount of usable data transferred in a given time, after protocol overhead is subtracted?',1,['Goodput','Bandwidth','Throughput','Latency'],'Bandwidth = theoretische Kapazität. Throughput = tatsächlich gemessene Rate. Goodput = Throughput minus Overhead (Header, Acks, Wiederholungen).'],
+['phy','Which term describes the capacity of a medium to carry data, measured in bits per second?',1,['Bandwidth','Goodput','Latency','Crosstalk'],'Bandwidth ist die maximale Kapazität des Mediums (z. B. 1 Gbit/s). Was wirklich ankommt, ist der Throughput.'],
+['phy','What does latency mean?',1,['The time delay of data travelling from one point to another','The capacity of a link','The number of collisions per second','The amount of data lost on a link'],'Latency = Verzögerung. Jedes Gerät auf dem Weg und die Strecke selbst kosten Zeit.'],
+['phy','Which IEEE standard defines wireless LAN (Wi-Fi)?',1,['802.11','802.3','802.15','802.16'],'802.3 = Ethernet, 802.11 = WLAN, 802.15 = Bluetooth, 802.16 = WiMAX.'],
+['phy','Which medium carries data as pulses of light?',1,['Fiber-optic cable','UTP cable','Coaxial cable','Wireless'],'Kupfer = elektrische Impulse, Glasfaser = Lichtimpulse, Wireless = modulierte Funkwellen.'],
+['phy','What are three areas of concern in wireless networks? (Choose three.)',3,['Coverage area','Interference','Security','Crosstalk between wire pairs','Connector types','Cable length'],'Funk hat begrenzte Reichweite, wird von anderen Geräten gestört und kann von jedem in Reichweite empfangen werden, daher ist Sicherheit wichtig.'],
+['phy','What do the T568A and T568B standards define?',1,['The order of the wires in an RJ-45 connector','The maximum length of a fiber cable','The frequencies used by Wi-Fi','The size of an Ethernet frame'],'T568A/B legen die Adernreihenfolge (Pinbelegung) fest. Beide Enden gleich = straight-through, A auf einer und B auf der anderen Seite = crossover.'],
+['phy','What is an advantage of STP over UTP cable?',1,['Better protection against EMI and RFI','Lower price','Easier installation','It does not need connectors'],'STP (shielded) hat eine zusätzliche Abschirmung gegen Störungen, ist dafür teurer und schwieriger zu verlegen.'],
+['phy','Which three factors can make throughput lower than the bandwidth of a link? (Choose three.)',3,['The amount of traffic','The type of traffic','Latency caused by devices on the path','The colour of the cable','The length of the MAC address','The hostname of the router'],'Wie viel und welche Art von Verkehr unterwegs ist und wie viele Geräte ihn verzögern, bestimmt die tatsächliche Übertragungsrate.'],
+
+/* ───────── Ethernet & switching ───────── */
+['eth','How long is an Ethernet MAC address?',1,['48 bits (12 hexadecimal digits)','32 bits (4 decimal numbers)','64 bits (16 hexadecimal digits)','128 bits (32 hexadecimal digits)'],'MAC = 48 Bit = 6 Byte = 12 Hex-Ziffern. Zum Vergleich: IPv4 = 32 Bit, IPv6 = 128 Bit.'],
+['eth','What does the first half (first 24 bits) of a MAC address identify?',1,['The manufacturer of the network card (OUI)','The network the device belongs to','The country where the device is used','The speed of the interface'],'Die ersten 3 Byte sind die OUI (Herstellerkennung), die letzten 3 Byte vergibt der Hersteller pro Gerät.'],
+['eth','Which two sublayers make up the data link layer? (Choose two.)',2,['LLC (Logical Link Control)','MAC (Media Access Control)','TCP','IP','PHY'],'LLC spricht mit Schicht 3 (welches Protokoll steckt im Frame). MAC kümmert sich um Adressierung, Medienzugriff und Frame-Aufbau.'],
+['eth','What are the minimum and maximum sizes of a standard Ethernet frame?',1,['64 bytes and 1518 bytes','32 bytes and 1500 bytes','64 bytes and 1024 bytes','128 bytes and 1518 bytes'],'Ethernet-Frame: mindestens 64, höchstens 1518 Byte. Kleinere Frames (Runts, Kollisionsfragmente) werden verworfen.'],
+['eth','What is the purpose of the FCS field in an Ethernet frame?',1,['To detect transmission errors in the frame','To identify the upper-layer protocol','To store the source MAC address','To mark the start of the frame'],'FCS = Frame Check Sequence. Der Empfänger rechnet die Prüfsumme (CRC) nach; stimmt sie nicht, wird der Frame verworfen.'],
+['eth','How does a switch fill its MAC address table?',1,['It records the source MAC address and the port of every frame it receives','It records the destination MAC address of every frame it sends','It asks a DHCP server for the addresses','The administrator has to enter all addresses by hand'],'Der Switch lernt aus der Quell-MAC: „Diese Adresse hängt an diesem Port.“ Weitergeleitet wird anhand der Ziel-MAC.'],
+['eth','A switch receives a frame with a destination MAC address that is not in its MAC address table. What does it do?',1,['It sends the frame out of all ports except the one it arrived on','It drops the frame','It sends the frame back to the sender','It sends an ARP request for the address'],'Unbekanntes Ziel = Flooding: raus aus allen Ports außer dem Eingangsport. Antwortet das Ziel, lernt der Switch dessen Port.'],
+['eth','What is the Ethernet broadcast MAC address?',1,['FF-FF-FF-FF-FF-FF','00-00-00-00-00-00','01-00-5E-00-00-01','255.255.255.255'],'Alle 48 Bit auf 1 = FF-FF-FF-FF-FF-FF. Ein solcher Frame geht an alle Geräte im LAN.'],
+['eth','Which switching method receives the whole frame and checks it for errors before forwarding it?',1,['Store-and-forward','Fast-forward','Fragment-free','Cut-through'],'Store-and-forward speichert den ganzen Frame, prüft die FCS und leitet erst dann weiter. Sicher, aber etwas langsamer.'],
+['eth','Which switching method starts forwarding as soon as the destination MAC address has been read and therefore has the lowest latency?',1,['Fast-forward (cut-through)','Store-and-forward','Fragment-free','Buffered switching'],'Fast-forward liest nur die Ziel-MAC und sendet sofort. Schnellste Methode, leitet aber auch fehlerhafte Frames weiter.'],
+['eth','How many bytes of a frame does a fragment-free switch read before it starts forwarding?',1,['The first 64 bytes','The first 6 bytes','The first 1518 bytes','Only the FCS'],'Fragment-free prüft die ersten 64 Byte, weil die meisten Kollisionsfehler dort auftreten. Kompromiss zwischen den beiden anderen Methoden.'],
+['eth','What is the purpose of ARP?',1,['To find the MAC address that belongs to a known IPv4 address','To find the IPv4 address that belongs to a known name','To assign IPv4 addresses to hosts automatically','To find the best route to a remote network'],'ARP = Address Resolution Protocol: IP bekannt, MAC gesucht. (Name → IP macht DNS, automatische Adressvergabe macht DHCP.)'],
+['eth','How is an ARP request sent?',1,['As a broadcast frame to all devices in the LAN','As a unicast frame to the default gateway','As a multicast packet to all routers','As a unicast frame to the DNS server'],'Die Anfrage geht als Broadcast an alle („Wer hat diese IP?“). Die Antwort kommt als Unicast direkt zurück.'],
+['eth','A host wants to send data to a remote network but has no entry for its default gateway in the ARP cache. What does it do first?',1,['It sends an ARP request for the MAC address of the default gateway','It sends an ARP request for the MAC address of the remote host','It drops the data','It sends the data to the broadcast MAC address'],'Für fremde Netze braucht der Host die MAC des Gateways. ARP funktioniert nur innerhalb des eigenen Netzes, nie für entfernte Hosts.'],
+['eth','What are two possible problems caused by ARP? (Choose two.)',2,['An attacker can send fake ARP replies (ARP spoofing)','Many ARP broadcasts can slow down a large network','ARP uses up all public IPv4 addresses','ARP encrypts frames so they cannot be analysed','ARP stops switches from learning MAC addresses'],'ARP hat keine Echtheitsprüfung (Spoofing/Poisoning möglich) und erzeugt Broadcasts, die in großen Netzen Last verursachen.'],
+['eth','What does the auto-MDIX feature of a switch port do?',1,['It detects the cable type and adjusts the port so that straight-through or crossover both work','It sets the speed of the port to the maximum','It turns off unused ports automatically','It assigns an IP address to the port'],'Auto-MDIX erkennt, ob ein straight-through- oder crossover-Kabel steckt, und passt die Sende-/Empfangspins automatisch an.'],
+['eth','What is true about full-duplex communication?',1,['Both devices can send and receive at the same time','Only one device can send at a time','Data can only flow in one direction','It always needs a hub'],'Full-duplex = beide Richtungen gleichzeitig, keine Kollisionen. Half-duplex = abwechselnd, mit CSMA/CD.'],
+['eth','Which access method do wireless LANs use to avoid collisions?',1,['CSMA/CA','CSMA/CD','Token passing','Polling'],'WLAN: CSMA/CA (Collision Avoidance, Kollisionen vermeiden). Altes Half-duplex-Ethernet: CSMA/CD (Collision Detection, Kollisionen erkennen).'],
+['eth','Which type of topology diagram shows IP addresses, interface names and how devices are logically connected?',1,['Logical topology','Physical topology','Rack diagram','Floor plan'],'Logical = Adressen, Interfaces, Netze. Physical = wo die Geräte stehen, welche Ports und Kabel benutzt werden.'],
+['eth','A frame passes through a router on its way to the destination. What happens to the Layer 2 frame?',1,['The router removes the old frame and builds a new one with new MAC addresses','The frame is forwarded unchanged','Only the IP addresses are changed','The router adds a second frame around the first one'],'Jeder Router packt das Packet aus dem alten Frame aus und in einen neuen Frame für den nächsten Abschnitt ein. Das IP-Packet bleibt gleich.'],
+['eth','Which Windows command shows the ARP cache of a PC?',1,['arp -a','ipconfig /all','netstat -r','nslookup'],'arp -a listet die gespeicherten Zuordnungen IP → MAC. Auf einem Cisco-Router: show ip arp.'],
+['eth','Which part of an Ethernet frame carries the error-detection information?',1,['The trailer','The header','The preamble','The data field'],'Frame = Header (Adressen, Typ) + Data + Trailer. Im Trailer steht die FCS zur Fehlererkennung.'],
+
+/* ───────── IPv4 & subnetting ───────── */
+['ip4','Which subnet mask belongs to the prefix /26?',1,['255.255.255.192','255.255.255.128','255.255.255.224','255.255.255.240'],'/26 = 24 + 2 Bit. Zwei Bit im letzten Oktett: 128 + 64 = 192.'],
+['ip4','How many usable host addresses does a /27 network have?',1,['30','32','62','14'],'32 − 27 = 5 Host-Bits → 2^5 = 32 Adressen, minus Netz- und Broadcast-Adresse = 30.'],
+['ip4','What is the network address of the host 192.168.10.70/26?',1,['192.168.10.64','192.168.10.0','192.168.10.32','192.168.10.128'],'/26 hat Blockgröße 64: Netze beginnen bei 0, 64, 128, 192. Die 70 liegt im Block 64–127.'],
+['ip4','What is the broadcast address of the network that contains 172.16.5.130/25?',1,['172.16.5.255','172.16.5.127','172.16.5.128','172.16.255.255'],'/25 hat Blockgröße 128: Netze 0–127 und 128–255. Die 130 liegt im zweiten Netz, dessen letzte Adresse ist .255.'],
+['ip4','What is the broadcast address of the network that contains 10.1.1.37/28?',1,['10.1.1.47','10.1.1.39','10.1.1.63','10.1.1.32'],'/28 hat Blockgröße 16: … 32, 48 … Die 37 liegt im Netz 32–47. Broadcast = letzte Adresse = .47.'],
+['ip4','A subnet must hold 50 hosts. Which prefix wastes the fewest addresses?',1,['/26','/27','/25','/24'],'/27 hat nur 30 Hosts (zu klein), /26 hat 62 Hosts (passt). Immer die kleinste Größe nehmen, die noch reicht.'],
+['ip4','A subnet must hold 100 hosts. Which subnet mask fits best?',1,['255.255.255.128','255.255.255.192','255.255.255.0','255.255.255.224'],'/25 (Maske .128) bietet 126 Hosts. /26 hätte nur 62 und wäre zu klein.'],
+['ip4','Which prefix is the best choice for a point-to-point link between two routers?',1,['/30','/24','/28','/32'],'/30 hat genau 2 nutzbare Adressen, eine für jedes Ende der Verbindung.'],
+['ip4','The network 192.168.1.0/24 is divided into /28 subnets. How many subnets are created and how many hosts fit in each?',1,['16 subnets with 14 hosts each','8 subnets with 30 hosts each','14 subnets with 16 hosts each','4 subnets with 62 hosts each'],'Von /24 auf /28 werden 4 Bit geliehen → 2^4 = 16 Subnetze. Es bleiben 4 Host-Bits → 16 − 2 = 14 Hosts.'],
+['ip4','Which three address ranges are private IPv4 ranges? (Choose three.)',3,['10.0.0.0/8','172.16.0.0/12','192.168.0.0/16','169.254.0.0/16','127.0.0.0/8','224.0.0.0/4'],'Privat (RFC 1918): 10.x.x.x, 172.16.x.x bis 172.31.x.x und 192.168.x.x. Diese Adressen werden im Internet nicht geroutet.'],
+['ip4','Which of these addresses is a private IPv4 address?',1,['172.20.4.4','172.32.4.4','192.169.1.1','11.0.0.1'],'Der private 172er-Bereich reicht nur von 172.16 bis 172.31. 172.32, 192.169 und 11.x sind öffentlich.'],
+['ip4','A PC shows the address 169.254.10.20. What does this tell you?',1,['The PC could not reach a DHCP server and gave itself a link-local address','The PC has a public address from the provider','The PC is using its loopback address','The PC is configured as a DHCP server'],'169.254.0.0/16 = APIPA/link-local. Windows vergibt sie sich selbst, wenn kein DHCP-Server antwortet.'],
+['ip4','What is the address 127.0.0.1 used for?',1,['To test the TCP/IP stack on the local host (loopback)','To reach all hosts in the local network','To reach the default gateway','To request an address from DHCP'],'Loopback: Der Host spricht mit sich selbst. Ein erfolgreiches ping 127.0.0.1 zeigt, dass TCP/IP auf dem Gerät funktioniert.'],
+['ip4','What is the result when a host ANDs an IPv4 address with its subnet mask?',1,['The network address','The broadcast address','The host portion of the address','The default gateway'],'Bitweises UND mit der Maske löscht alle Host-Bits. Übrig bleibt die Netzadresse.'],
+['ip4','What is the last usable host address in the network 192.168.1.96/27?',1,['192.168.1.126','192.168.1.127','192.168.1.128','192.168.1.110'],'/27 hat Blockgröße 32: Netz 96–127. Broadcast ist .127, der letzte Host also .126.'],
+['ip4','Which address is a valid host address in the network 10.10.10.32/28?',1,['10.10.10.40','10.10.10.32','10.10.10.47','10.10.10.48'],'Netz 32–47: .32 ist die Netzadresse, .47 der Broadcast, .48 gehört schon zum nächsten Netz. Hosts: .33 bis .46.'],
+['ip4','Which address range is reserved for IPv4 multicast?',1,['224.0.0.0 to 239.255.255.255','192.168.0.0 to 192.168.255.255','240.0.0.0 to 255.255.255.255','169.254.0.0 to 169.254.255.255'],'224–239 im ersten Oktett = Multicast. 240 und höher ist experimentell reserviert.'],
+['ip4','What is the main benefit of VLSM?',1,['Subnets can have different sizes, so fewer addresses are wasted','All subnets get exactly the same size','No subnet masks are needed any more','Private addresses can be used on the Internet'],'VLSM = Variable Length Subnet Mask: jedes Subnetz bekommt die Größe, die es wirklich braucht.'],
+['ip4','A company needs four subnets from the network 192.168.1.0/24. Which prefix must it use?',1,['/26','/25','/27','/28'],'Für 4 Subnetze braucht man 2 geliehene Bit (2^2 = 4): /24 + 2 = /26.'],
+['ip4','Which prefix corresponds to the subnet mask 255.255.248.0?',1,['/21','/20','/22','/29'],'255.255 = 16 Bit, 248 = 11111000 = 5 Bit. Zusammen /21.'],
+['ip4','How many usable host addresses does a /22 network have?',1,['1022','1024','510','2046'],'32 − 22 = 10 Host-Bits → 2^10 = 1024 Adressen, minus 2 = 1022.'],
+['ip4','How many usable host addresses are available with the subnet mask 255.255.255.248?',1,['6','8','14','2'],'.248 = /29 → 3 Host-Bits → 8 Adressen, minus 2 = 6 Hosts.'],
+['ip4','What is the purpose of NAT?',1,['To translate private IPv4 addresses into public ones so many hosts can share few public addresses','To translate names into IP addresses','To assign IP addresses to hosts automatically','To encrypt traffic between two sites'],'NAT übersetzt am Router private in öffentliche Adressen und spart so öffentliche IPv4-Adressen.'],
+['ip4','Which device separates broadcast domains?',1,['Router','Switch','Hub','Access point'],'Router leiten Broadcasts nicht weiter: jedes Router-Interface ist eine eigene Broadcast-Domäne. Switches leiten Broadcasts an alle Ports weiter.'],
+['ip4','To which subnet does the address 172.16.45.14/30 belong?',1,['172.16.45.12','172.16.45.8','172.16.45.16','172.16.45.0'],'/30 hat Blockgröße 4: … 8, 12, 16 … Die 14 liegt im Block 12–15.'],
+['ip4','Which host is in the same subnet as 192.168.1.66/27?',1,['192.168.1.94','192.168.1.97','192.168.1.63','192.168.1.33'],'/27 hat Blockgröße 32: Die 66 liegt im Netz 64–95. Nur .94 liegt im selben Block.'],
+['ip4','Which address is the limited broadcast address that reaches all hosts in the local network?',1,['255.255.255.255','0.0.0.0','127.255.255.255','224.0.0.1'],'255.255.255.255 = alle im eigenen Netz. Router leiten diesen Broadcast nicht weiter.'],
+['ip4','Which devices should normally get a static IPv4 address instead of one from DHCP?',1,['Servers, printers and network devices','Laptops of visitors','Smartphones of employees','All end devices without exception'],'Geräte, die andere immer unter derselben Adresse finden müssen (Server, Drucker, Router, Switches), bekommen feste Adressen.'],
+
+/* ───────── IPv6 ───────── */
+['ip6','How long is an IPv6 address?',1,['128 bits, written as 8 hextets','64 bits, written as 4 hextets','32 bits, written as 4 octets','48 bits, written as 6 bytes'],'IPv6 = 128 Bit = 8 Gruppen (Hextets) zu je 16 Bit, hexadezimal geschrieben und durch Doppelpunkte getrennt.'],
+['ip6','Which is the shortest correct way to write 2001:0DB8:0000:0000:0000:FF00:0042:8329?',1,['2001:DB8::FF00:42:8329','2001:DB8:0:0:0:FF:42:8329','2001:DB8::FF::42:8329','2001:DB8::FF00:0042:8329'],'Regel 1: führende Nullen pro Hextet weglassen. Regel 2: eine zusammenhängende Folge von Null-Hextets durch :: ersetzen, aber nur einmal.'],
+['ip6','Which is the shortest correct way to write FE80:0000:0000:0000:0220:0BFF:FE00:0001?',1,['FE80::220:BFF:FE00:1','FE8::22:BFF:FE:1','FE80:0:0:0:220:BFF:FE00:1','FE80::220:BFF:FE::1'],'Nur führende Nullen dürfen weg (0220 → 220, 0001 → 1), nie Nullen am Ende. Die drei Null-Hextets werden zu ::.'],
+['ip6','Which prefix identifies IPv6 link-local addresses?',1,['FE80::/10','FC00::/7','2000::/3','FF00::/8'],'FE80 = link-local, gilt nur im eigenen Link und wird nicht geroutet.'],
+['ip6','Which IPv6 address type is comparable to private IPv4 addresses?',1,['Unique local (FC00::/7)','Global unicast (2000::/3)','Link-local (FE80::/10)','Multicast (FF00::/8)'],'Unique local (beginnt mit FC oder FD) wird nur intern verwendet und nicht im Internet geroutet.'],
+['ip6','Which prefix covers the global unicast addresses that are currently assigned?',1,['2000::/3','FE80::/10','FC00::/7','::1/128'],'Global unicast = öffentliche IPv6-Adressen. Sie beginnen mit 2 oder 3.'],
+['ip6','What is the IPv6 loopback address?',1,['::1','::','FE80::1','FF02::1'],'::1 entspricht 127.0.0.1 in IPv4. :: (alles Null) ist die „unspecified“-Adresse.'],
+['ip6','Which address reaches all IPv6-enabled devices on the local link?',1,['FF02::1','FF02::2','FE80::1','::1'],'FF02::1 = all-nodes multicast (ersetzt den Broadcast). FF02::2 = all-routers multicast.'],
+['ip6','Which three types of communication exist in IPv6? (Choose three.)',3,['Unicast','Multicast','Anycast','Broadcast','Simplex','Directed broadcast'],'IPv6 kennt keinen Broadcast mehr. Dessen Aufgabe übernehmen Multicast-Adressen.'],
+['ip6','How does a host get its IPv6 address with SLAAC?',1,['It combines the prefix from a Router Advertisement with an interface ID it creates itself','A DHCPv6 server assigns the complete address','The administrator types the address in by hand','It copies the address of the router'],'SLAAC = Stateless Address Autoconfiguration: Präfix kommt per Router Advertisement (RA), den Host-Teil erzeugt das Gerät selbst (EUI-64 oder zufällig).'],
+['ip6','How does EUI-64 turn a 48-bit MAC address into a 64-bit interface ID?',1,['It inserts FFFE in the middle and flips the seventh bit','It adds 16 zeros at the end','It repeats the first two bytes','It adds the prefix FE80 at the front'],'MAC in der Mitte teilen, FFFE einfügen, dann das 7. Bit (U/L-Bit) umdrehen.'],
+['ip6','Which command enables a Cisco router to forward IPv6 packets?',1,['ipv6 unicast-routing','ipv6 enable','ip routing','ipv6 address autoconfig'],'Erst mit ipv6 unicast-routing (global config) wird der Router zum IPv6-Router und sendet Router Advertisements.'],
+['ip6','Which prefix length is recommended for IPv6 LANs and is required for SLAAC?',1,['/64','/48','/128','/32'],'64 Bit Netz + 64 Bit Interface-ID. Nur mit /64 funktioniert SLAAC.'],
+['ip6','Which two ICMPv6 messages replace ARP for finding the MAC address of a neighbour? (Choose two.)',2,['Neighbor Solicitation','Neighbor Advertisement','Router Solicitation','Router Advertisement','Echo Request'],'NS fragt („Wer hat diese Adresse?“), NA antwortet. RS und RA dienen dagegen der Router-Suche und Adresskonfiguration.'],
+['ip6','Which migration technique lets a device run IPv4 and IPv6 at the same time?',1,['Dual stack','Tunneling','Translation (NAT64)','Encapsulation'],'Dual stack = beide Protokolle parallel. Tunneling = IPv6 in IPv4 verpackt. NAT64 = Übersetzung zwischen beiden.'],
+['ip6','Which migration technique carries IPv6 packets inside IPv4 packets across an IPv4-only network?',1,['Tunneling','Dual stack','NAT64','SLAAC'],'Beim Tunneling wird das IPv6-Packet als Nutzlast in ein IPv4-Packet gepackt und am anderen Ende wieder ausgepackt.'],
+['ip6','Which type of address must every IPv6-enabled interface have?',1,['A link-local address','A global unicast address','A unique local address','An anycast address'],'Ohne link-local Adresse (FE80::/10) funktioniert IPv6 auf einem Interface nicht. Sie wird automatisch erzeugt.'],
+['ip6','A host uses SLAAC with stateless DHCPv6. What does it get from the DHCPv6 server?',1,['Additional information such as the DNS server address','Its complete IPv6 address','Its MAC address','Nothing, the server is not contacted'],'Stateless DHCPv6: Adresse per SLAAC, Zusatzinfos (DNS, Domainname) vom Server. Stateful DHCPv6: auch die Adresse kommt vom Server.'],
+['ip6','What is an improvement of the IPv6 header compared with the IPv4 header?',1,['It is simpler and has a fixed length, so routers can process it faster','It contains a larger checksum field','It allows routers to fragment packets','It is shorter than the IPv4 header'],'Der IPv6-Header hat feste 40 Byte und weniger Felder (z. B. keine Checksumme). Router fragmentieren in IPv6 nicht.'],
+['ip6','Which field in the IPv6 header does the same job as the TTL field in IPv4?',1,['Hop Limit','Flow Label','Next Header','Traffic Class'],'Hop Limit wird an jedem Router um 1 verringert. Bei 0 wird das Packet verworfen.'],
+['ip6','What is the purpose of duplicate address detection (DAD)?',1,['To make sure that no other device on the link already uses the same IPv6 address','To find the fastest router','To compress IPv6 addresses','To translate IPv6 into IPv4 addresses'],'Vor der Nutzung einer Adresse schickt der Host eine Neighbor Solicitation für seine eigene Adresse. Antwortet jemand, ist sie schon vergeben.'],
+
+/* ───────── Routing & network layer ───────── */
+['rte','What does a router use to decide where to forward a packet?',1,['The destination IP address and its routing table','The source MAC address and its ARP cache','The destination port number','The hostname of the destination'],'Der Router sucht zur Ziel-IP den passenden Eintrag in der Routing-Tabelle und schickt das Packet zum dort genannten Ausgang.'],
+['rte','How is a default route written in IPv4?',1,['0.0.0.0/0','127.0.0.1/8','255.255.255.255/32','192.168.0.0/16'],'0.0.0.0/0 passt auf jedes Ziel und wird benutzt, wenn kein genauerer Eintrag existiert (Gateway of last resort).'],
+['rte','What happens to the TTL field as a packet travels through the network?',1,['Each router decreases it by one; at zero the packet is dropped','Each router increases it by one','It is only changed by the destination host','Switches set it back to its starting value'],'TTL verhindert endloses Kreisen. Bei 0 verwirft der Router das Packet und meldet ICMP Time Exceeded.'],
+['rte','A host has a correct IP address and mask but a wrong default gateway. What is the effect?',1,['It can reach hosts in its own network but not in other networks','It cannot communicate with anyone','It can only reach other networks','It loses its IP address'],'Das Gateway braucht man nur für fremde Netze. Lokal funktioniert die Kommunikation weiter.'],
+['rte','Which three characteristics describe the IP protocol? (Choose three.)',3,['Connectionless','Best effort (unreliable)','Media independent','Guarantees delivery','Retransmits lost packets','Sets up a session before sending'],'IP baut keine Verbindung auf, garantiert nichts und läuft über jedes Medium. Für Zuverlässigkeit sorgt bei Bedarf TCP.'],
+['rte','What does the code C mean in the routing table of a Cisco router?',1,['A directly connected network','A static route','A route learned from OSPF','The default route'],'C = connected, L = local (eigene Interface-Adresse), S = static, O = OSPF, D = EIGRP.'],
+['rte','Where does a Cisco router keep its running configuration?',1,['RAM','NVRAM','Flash','ROM'],'RAM: running-config (geht beim Ausschalten verloren). NVRAM: startup-config. Flash: IOS-Image. ROM: Bootstrap und POST.'],
+['rte','Where is the startup configuration of a Cisco device stored?',1,['NVRAM','RAM','Flash','ROM'],'NVRAM behält den Inhalt ohne Strom. Beim Start wird die startup-config von dort in den RAM geladen.'],
+['rte','In which order does a Cisco router start up?',1,['POST → load bootstrap → load IOS → load configuration','Load IOS → POST → load configuration → load bootstrap','Load configuration → load IOS → POST → load bootstrap','Load bootstrap → load configuration → POST → load IOS'],'Erst Hardwaretest (POST), dann Bootstrap aus dem ROM, dann IOS (meist aus Flash), zuletzt die startup-config aus dem NVRAM.'],
+['rte','Which command shows the routing table of a Cisco router?',1,['show ip route','show ip interface brief','show running-config','show arp'],'show ip route zeigt alle bekannten Netze und den Weg dorthin. Auf einem Windows-PC: route print oder netstat -r.'],
+['rte','How does a host decide whether a destination is in its own network or in a remote one?',1,['It compares the network part of its own address with that of the destination, using its subnet mask','It sends a ping to the destination first','It asks the DNS server','It checks the MAC address of the destination'],'Der Host wendet seine Maske auf beide Adressen an. Gleiche Netzadresse = lokal (direkt senden), sonst an das Default Gateway.'],
+['rte','What is an advantage of dynamic routing protocols over static routes?',1,['Routers learn remote networks automatically and adapt when the topology changes','They need less CPU and memory','They are more secure by default','They never need any configuration'],'Dynamisches Routing tauscht Netzinfos automatisch aus und findet bei Ausfällen neue Wege. Statische Routen muss man von Hand pflegen.'],
+['rte','Which field in the IPv4 header tells the receiver which upper-layer protocol (for example TCP, UDP or ICMP) is carried in the packet?',1,['Protocol','Time to Live','Differentiated Services','Header Checksum'],'Protocol-Feld: 1 = ICMP, 6 = TCP, 17 = UDP.'],
+['rte','A router receives a packet for a network that is not in its routing table, and it has no default route. What does it do?',1,['It drops the packet','It sends the packet out of all interfaces','It sends the packet back to the source host unchanged','It stores the packet until a route appears'],'Ohne passende Route wird das Packet verworfen. Der Absender bekommt normalerweise eine ICMP-Meldung „Destination Unreachable“.'],
+['rte','What must be true about the interfaces of a router?',1,['Each interface belongs to a different IP network','All interfaces must be in the same IP network','Only one interface may have an IP address','Interfaces do not need IP addresses'],'Ein Router verbindet Netze. Deshalb liegt jedes Interface in einem eigenen Netz und ist dort das Default Gateway.'],
+['rte','A router interface has an IP address but stays administratively down. Which command is missing?',1,['no shutdown','enable','ip routing','copy running-config startup-config'],'Router-Interfaces sind standardmäßig abgeschaltet. Mit no shutdown im Interface-Modus werden sie aktiviert.'],
+['rte','What does a router do when an IPv4 packet is larger than the MTU of the outgoing interface?',1,['It splits the packet into fragments','It always drops the packet','It compresses the packet','It sends the packet over a different interface'],'In IPv4 darf der Router fragmentieren. In IPv6 fragmentieren Router nicht, das muss der Absender tun.'],
+
+/* ───────── Transport layer ───────── */
+['tra','In which order are the messages of the TCP three-way handshake sent?',1,['SYN → SYN-ACK → ACK','SYN → ACK → FIN','ACK → SYN → SYN-ACK','SYN-ACK → SYN → ACK'],'Client: SYN. Server: SYN-ACK. Client: ACK. Danach steht die Verbindung.'],
+['tra','Which TCP flag is used to end a connection in an orderly way?',1,['FIN','SYN','RST','PSH'],'Normaler Abbau in vier Schritten: FIN, ACK, FIN, ACK. RST bricht eine Verbindung dagegen sofort ab.'],
+['tra','What are two characteristics of UDP? (Choose two.)',2,['It is connectionless','It has very low overhead','It resends lost data','It puts data back in the right order','It uses a three-way handshake'],'UDP schickt einfach los: schnell und schlank (8 Byte Header), aber ohne Bestätigung, Wiederholung oder Reihenfolge.'],
+['tra','Which three protocols normally use UDP? (Choose three.)',3,['DHCP','TFTP','DNS (queries)','HTTP','SMTP','FTP'],'UDP: DNS-Anfragen, DHCP, TFTP, SNMP, VoIP. TCP: HTTP/HTTPS, FTP, SMTP, POP3, IMAP, SSH, Telnet.'],
+['tra','What is the purpose of the window size in TCP?',1,['It tells the sender how much data the receiver can accept before an acknowledgment is needed','It sets the maximum size of the IP packet','It defines how long a connection may stay open','It selects the destination application'],'Window size = Flow control. Der Empfänger bestimmt, wie viele Bytes er verarbeiten kann, bevor er bestätigt.'],
+['tra','What are TCP sequence numbers used for?',1,['To put segments back in the right order and to notice missing ones','To identify the application on the server','To encrypt the data','To find the route to the destination'],'Jedes Byte ist nummeriert. So kann der Empfänger sortieren und Lücken erkennen.'],
+['tra','UDP datagrams arrive at the destination in the wrong order. What does UDP do?',1,['It passes the data to the application in the order it arrived','It sorts the datagrams before delivery','It asks the sender to send everything again','It drops all datagrams'],'UDP nummeriert nichts und sortiert nichts. Falls nötig, muss sich die Anwendung selbst darum kümmern.'],
+['tra','Which range of port numbers is called the well-known ports?',1,['0 to 1023','1024 to 49151','49152 to 65535','1 to 65535'],'0–1023 well-known (feste Dienste), 1024–49151 registered, 49152–65535 dynamic/private (Client-Quellports).'],
+['tra','What is a socket?',1,['The combination of an IP address and a port number','The combination of a MAC address and an IP address','A physical connector on a switch','A type of TCP flag'],'Socket = IP-Adresse + Port, z. B. 192.168.1.5:80. Ein Socket-Paar (Quelle und Ziel) identifiziert eine Verbindung eindeutig.'],
+['tra','Which destination port does a client use to open a secure web page (HTTPS)?',1,['443','80','22','53'],'HTTP = 80, HTTPS = 443.'],
+['tra','Which port does SSH use?',1,['22','23','21','25'],'SSH = 22 (verschlüsselt), Telnet = 23 (Klartext), FTP = 20/21, SMTP = 25.'],
+['tra','Which port does DNS use?',1,['53','67','69','110'],'DNS = 53, DHCP = 67/68, TFTP = 69, POP3 = 110.'],
+['tra','Which protocol and port does a mail client use to send e-mail to a mail server?',1,['SMTP, port 25','POP3, port 110','IMAP, port 143','HTTP, port 80'],'Senden = SMTP (25). Abholen = POP3 (110) oder IMAP (143).'],
+['tra','Which ports does FTP use?',1,['20 for data and 21 for control','22 for data and 23 for control','67 for data and 68 for control','80 for data and 443 for control'],'FTP baut zwei TCP-Verbindungen auf: Port 21 für Befehle, Port 20 für die eigentlichen Daten.'],
+['tra','Which source port does a client normally use when it contacts a web server?',1,['A randomly chosen port from the dynamic range','Port 80','Port 443','The same port as the server'],'Der Client wählt einen zufälligen hohen Port als Absender. An diesen Port schickt der Server die Antwort zurück.'],
+['tra','What does TCP do when a segment is not acknowledged in time?',1,['It sends the segment again','It closes the connection immediately','It ignores the loss','It switches to UDP'],'TCP startet für gesendete Daten einen Timer. Kommt kein ACK, wird neu gesendet. Das macht TCP zuverlässig.'],
+['tra','Which transport protocol is the better choice for live voice or video calls?',1,['UDP, because speed matters more than recovering every lost packet','TCP, because every packet must arrive','TCP, because it has less overhead','UDP, because it guarantees delivery'],'Bei Echtzeit-Daten wären Wiederholungen zu spät und würden nur verzögern. Ein kleiner Verlust ist weniger schlimm als Wartezeit.'],
+['tra','What are three responsibilities of the transport layer? (Choose three.)',3,['Tracking individual conversations','Segmenting data and reassembling it','Identifying the right application with port numbers','Choosing the best route','Converting bits into signals','Assigning MAC addresses'],'Schicht 4 verbindet Anwendungen: Gespräche verfolgen, Daten zerteilen und wieder zusammensetzen, Anwendung per Port ansprechen.'],
+['tra','How large are the headers of TCP and UDP?',1,['TCP 20 bytes, UDP 8 bytes','TCP 8 bytes, UDP 20 bytes','Both 20 bytes','TCP 40 bytes, UDP 20 bytes'],'TCP braucht mehr Felder (Sequenznummer, ACK, Window, Flags) und hat deshalb mindestens 20 Byte. UDP kommt mit 8 Byte aus.'],
+['tra','Which command shows the active TCP connections on a Windows host?',1,['netstat','nslookup','tracert','arp -a'],'netstat listet offene Verbindungen und Ports. So erkennt man auch unerwünschte Verbindungen.'],
+
+/* ───────── Application layer ───────── */
+['app','What does DNS do?',1,['It translates domain names into IP addresses','It assigns IP addresses to hosts','It transfers files between hosts','It encrypts web traffic'],'DNS = Telefonbuch des Internets: aus www.example.com wird eine IP-Adresse.'],
+['app','In which order are the four DHCP messages exchanged when a client gets an address?',1,['Discover → Offer → Request → Acknowledge','Request → Offer → Discover → Acknowledge','Offer → Discover → Acknowledge → Request','Discover → Request → Offer → Acknowledge'],'Merkwort DORA: Discover (Client sucht), Offer (Server bietet an), Request (Client nimmt an), Acknowledge (Server bestätigt).'],
+['app','How does a client send its DHCPDISCOVER message?',1,['As a broadcast, because it does not know any DHCP server yet','As a unicast to the default gateway','As a unicast to the DNS server','As a multicast to all routers'],'Der Client hat noch keine Adresse und kennt keinen Server. Deshalb ruft er per Broadcast ins ganze Netz.'],
+['app','Which four items does a DHCP server typically hand out to a client? (Choose the best answer.)',1,['IP address, subnet mask, default gateway and DNS server','MAC address, hostname, password and DNS server','IP address, MAC address, port number and gateway','Hostname, domain name, username and password'],'DHCP liefert alles, was ein Host für das Netz braucht: Adresse, Maske, Gateway und DNS-Server.'],
+['app','Which protocol downloads e-mail from the server and by default removes it from the server?',1,['POP3','IMAP','SMTP','HTTP'],'POP3 lädt herunter und löscht (einfach, ein Gerät). IMAP lässt die Mails auf dem Server und synchronisiert mehrere Geräte.'],
+['app','Which protocol keeps e-mail on the server so that several devices see the same mailbox?',1,['IMAP','POP3','SMTP','FTP'],'IMAP arbeitet mit Kopien: Die Originale bleiben auf dem Server, Ordner und Lesestatus werden synchronisiert.'],
+['app','Which HTTP message does a browser send to request a web page?',1,['GET','POST','PUT','ACK'],'GET = Daten anfordern. POST = Daten (z. B. ein Formular) an den Server schicken. PUT = Ressource hochladen.'],
+['app','Which HTTP message is used to send form data, such as a login, to a web server?',1,['POST','GET','SYN','OFFER'],'POST überträgt Daten vom Client zum Server im Body der Nachricht.'],
+['app','What is true about a peer-to-peer network?',1,['Every device can act as client and as server; no dedicated server is needed','It always needs a central server','It only works over the Internet','It can only connect two devices'],'In P2P-Netzen sind alle gleichberechtigt: Jeder kann Daten anbieten und abrufen. Einfach, aber schwer zentral zu verwalten.'],
+['app','Which protocol is used for file and printer sharing in Microsoft networks?',1,['SMB','SMTP','SNMP','SSH'],'SMB = Server Message Block: Zugriff auf freigegebene Ordner und Drucker.'],
+['app','What is the command nslookup used for?',1,['To query a DNS server and troubleshoot name resolution','To show the routing table','To display the MAC address table','To renew the DHCP lease'],'Mit nslookup fragt man gezielt einen DNS-Server ab und sieht, ob und wie ein Name aufgelöst wird.'],
+['app','Which DNS record type maps a name to an IPv6 address?',1,['AAAA','A','MX','NS'],'A = IPv4-Adresse, AAAA = IPv6-Adresse, MX = Mailserver, NS = zuständiger Nameserver.'],
+['app','Which DNS record type identifies the mail server of a domain?',1,['MX','A','AAAA','NS'],'MX = Mail Exchange. Darüber findet ein sendender Mailserver den Empfängerserver.'],
+['app','Which three tasks belong to the presentation layer of the OSI model? (Choose three.)',3,['Formatting data','Compressing data','Encrypting data','Routing packets','Assigning port numbers','Detecting collisions'],'Schicht 6 kümmert sich um die Darstellung: Format (z. B. JPG, MP3), Kompression und Verschlüsselung.'],
+['app','Which Windows command shows the complete IP configuration including MAC address, DHCP server and DNS servers?',1,['ipconfig /all','ipconfig','ping','netstat'],'ipconfig zeigt nur Adresse, Maske und Gateway. Mit /all kommen MAC-Adresse, DHCP- und DNS-Informationen dazu.'],
+['app','What is the main difference between Telnet and SSH?',1,['SSH encrypts the session, Telnet sends everything in plain text','Telnet is faster and encrypted, SSH is plain text','SSH only works on the console port','Telnet can only be used on switches'],'Beide dienen der Fernverwaltung. Telnet überträgt auch Passwörter lesbar, deshalb nimmt man SSH.'],
+['app','Which statement describes TFTP?',1,['A simple file transfer protocol that uses UDP port 69 and has no login','A secure file transfer protocol that uses TCP port 22','A mail protocol that uses TCP port 25','A protocol that resolves names with UDP port 53'],'TFTP = Trivial FTP: sehr einfach, ohne Anmeldung, über UDP. Wird oft für IOS-Images und Konfigurationssicherungen benutzt.'],
+['app','What describes the client-server model?',1,['A client requests a service and a server answers the request','Both devices have exactly the same role','The server asks the client for data','Clients talk to each other without servers'],'Der Client fragt (z. B. Browser), der Server liefert (z. B. Webserver).'],
+['app','A user gets a new address with the commands ipconfig /release and ipconfig /renew. Which service is involved?',1,['DHCP','DNS','ARP','NAT'],'/release gibt die DHCP-Adresse zurück, /renew fordert eine neue an.'],
+['app','Which protocol secures HTTP traffic between browser and web server?',1,['TLS (SSL)','SSH','SMB','ARP'],'HTTPS = HTTP über TLS (früher SSL). Die Daten werden verschlüsselt und der Server weist sich aus.'],
+
+/* ───────── Security ───────── */
+['sec','Which type of malware spreads by itself across the network without needing a host program or user action?',1,['Worm','Virus','Trojan horse','Spyware'],'Worm = verbreitet sich selbstständig. Virus = hängt an einem Programm und braucht dessen Ausführung. Trojaner = tarnt sich als nützlich.'],
+['sec','Which type of malware looks like a useful program but carries hidden malicious code?',1,['Trojan horse','Worm','Virus','Adware'],'Wie das Trojanische Pferd: außen harmlos, innen schädlich. Der Nutzer startet es selbst.'],
+['sec','An attacker uses ping sweeps and port scans to map a network. Which kind of attack is this?',1,['Reconnaissance attack','Access attack','Denial of service attack','Trust exploitation'],'Reconnaissance = Auskundschaften. Danach folgen oft Access-Angriffe (Eindringen) oder DoS (Lahmlegen).'],
+['sec','Password cracking, trust exploitation, port redirection and man-in-the-middle are examples of which kind of attack?',1,['Access attacks','Reconnaissance attacks','DoS attacks','Physical attacks'],'Access attacks nutzen Schwächen aus, um sich unerlaubt Zugang zu Systemen oder Daten zu verschaffen.'],
+['sec','What is the goal of a denial of service (DoS) attack?',1,['To make a service unavailable for legitimate users','To steal passwords unnoticed','To map the network','To install a backdoor'],'DoS überlastet oder stört einen Dienst so, dass echte Nutzer ihn nicht mehr erreichen.'],
+['sec','How does a DDoS attack differ from a DoS attack?',1,['It comes from many coordinated sources at the same time','It is always carried out by an employee','It only targets wireless networks','It does not use the network'],'DDoS = Distributed DoS: viele gekaperte Rechner (Zombies/Botnet) greifen gemeinsam an.'],
+['sec','What are the three parts of AAA?',1,['Authentication, authorization, accounting','Access, antivirus, auditing','Authentication, addressing, availability','Accounting, archiving, alarms'],'Authentication = wer bist du? Authorization = was darfst du? Accounting = was hast du getan?'],
+['sec','Which AAA component decides what a user is allowed to do after logging in?',1,['Authorization','Authentication','Accounting','Auditing'],'Authentication prüft die Identität, Authorization legt die Rechte fest, Accounting protokolliert die Aktivitäten.'],
+['sec','What does the command service password-encryption do?',1,['It encrypts all plain-text passwords in the configuration file','It forces users to choose long passwords','It encrypts all traffic that leaves the router','It enables SSH'],'Der Befehl verhindert, dass Passwörter im Klartext in der Konfiguration zu lesen sind (schwache Verschlüsselung, aber besser als nichts).'],
+['sec','Which command sets an encrypted password for access to privileged EXEC mode?',1,['enable secret','enable password','line console 0','login local'],'enable secret speichert das Passwort als Hash. enable password würde es im Klartext ablegen.'],
+['sec','What is the purpose of the command login block-for 120 attempts 3 within 60?',1,['To block logins for 120 seconds after 3 failed attempts within 60 seconds','To log users out after 120 seconds of inactivity','To allow 120 logins per minute','To limit passwords to 3 characters'],'Der Befehl bremst Brute-Force-Angriffe: Nach zu vielen Fehlversuchen ist die Anmeldung für eine Zeit gesperrt.'],
+['sec','Which command disconnects an idle console or VTY session after a set time?',1,['exec-timeout','login block-for','service timestamps','banner motd'],'exec-timeout (Minuten Sekunden) meldet inaktive Sitzungen automatisch ab.'],
+['sec','Which three steps are needed before SSH can be used on a Cisco device? (Choose three.)',3,['Configure a hostname and an IP domain name','Generate RSA keys','Create a local user and use login local on the VTY lines','Enable Telnet on the console port','Erase the startup configuration','Disable all passwords'],'SSH braucht: Hostname + ip domain-name, crypto key generate rsa, einen lokalen Benutzer und auf den VTY-Lines login local sowie transport input ssh.'],
+['sec','What is the effect of the command transport input ssh on the VTY lines?',1,['Only SSH connections are accepted; Telnet is refused','Both Telnet and SSH are accepted','All remote access is blocked','SSH is disabled'],'Damit ist unverschlüsseltes Telnet für den Fernzugriff abgeschaltet.'],
+['sec','Voltage spikes, brownouts and total power loss belong to which class of physical threats?',1,['Electrical threats','Environmental threats','Hardware threats','Maintenance threats'],'Hardware = physische Beschädigung. Environmental = Temperatur, Feuchtigkeit. Electrical = Stromprobleme. Maintenance = schlechte Wartung, fehlende Ersatzteile.'],
+['sec','Extreme temperature and humidity belong to which class of physical threats?',1,['Environmental threats','Electrical threats','Hardware threats','Maintenance threats'],'Environmental = Umgebungsbedingungen wie zu heiß, zu kalt, zu feucht oder zu trocken.'],
+['sec','What is the most effective way to protect against worm attacks?',1,['Install the security updates from the operating system vendor on all systems','Change the passwords every 30 days','Use longer network cables','Turn off the DHCP server'],'Würmer nutzen bekannte Schwachstellen. Aktuelle Patches schließen diese Lücken.'],
+['sec','What does a stateful packet inspection firewall check?',1,['Whether incoming packets are legitimate replies to requests from inside','Only the MAC address of the sender','Only whether a URL contains certain words','Whether the cable is plugged in correctly'],'SPI merkt sich ausgehende Verbindungen. Von außen darf nur herein, was eine Antwort auf eine interne Anfrage ist.'],
+['sec','Which firewall technique allows or blocks access based on IP or MAC addresses?',1,['Packet filtering','URL filtering','Application filtering','Stateful packet inspection'],'Packet filtering = nach Adressen. Application filtering = nach Portnummern. URL filtering = nach Webadressen oder Schlüsselwörtern.'],
+['sec','What is a zero-day attack?',1,['An attack that uses a vulnerability before the vendor has released a fix','An attack that lasts less than one day','An attack that happens at midnight','An attack that needs no network connection'],'Zero-day: Die Lücke ist noch nicht gepatcht, es gibt also „null Tage“ Vorwarnzeit.'],
+['sec','Which term describes software that secretly collects information about a user?',1,['Spyware','Adware','Firewall','Worm'],'Spyware späht aus (z. B. Tastatureingaben, Surfverhalten). Adware zeigt unerwünschte Werbung.'],
+['sec','What does a defense-in-depth approach mean?',1,['Using several layers of security so that one failure does not expose the network','Using one very strong firewall only','Hiding the network name','Keeping all devices in one room'],'Mehrere Schutzschichten hintereinander: Firewall, IPS, VPN, Endgeräteschutz, Zugangskontrolle. Fällt eine aus, greifen die anderen.'],
+['sec','Which password is the strongest?',1,['A long passphrase with upper and lower case letters, numbers and symbols','The name of the company','A single dictionary word','The same password as on other devices'],'Lang, gemischt, nicht im Wörterbuch, nicht wiederverwendet. Länge bringt am meisten.'],
+
+/* ───────── Cisco IOS & troubleshooting ───────── */
+['ios','Which prompt shows that you are in privileged EXEC mode?',1,['Router#','Router>','Router(config)#','Router(config-if)#'],'> = user EXEC, # = privileged EXEC, (config)# = global configuration, (config-if)# = Interface-Konfiguration.'],
+['ios','Which command takes you from user EXEC mode to privileged EXEC mode?',1,['enable','configure terminal','login','exit'],'enable wechselt von > nach #. Von dort geht es mit configure terminal in den Konfigurationsmodus.'],
+['ios','Which command takes you from privileged EXEC mode to global configuration mode?',1,['configure terminal','enable','interface vlan 1','line console 0'],'configure terminal (kurz conf t) öffnet den globalen Konfigurationsmodus: Router(config)#.'],
+['ios','Which command saves the current configuration so that it survives a reboot?',1,['copy running-config startup-config','copy startup-config running-config','show running-config','reload'],'Die running-config liegt im RAM. Erst das Kopieren in die startup-config (NVRAM) macht sie dauerhaft.'],
+['ios','An administrator changes the configuration and reloads the device without saving. What happens?',1,['The changes are lost','The changes are saved automatically','The device does not start any more','The device asks for a new IOS image'],'Beim Neustart wird die startup-config geladen. Alles, was nur in der running-config stand, ist weg.'],
+['ios','What is the purpose of the command banner motd?',1,['To show a message, usually a legal warning, to everyone who connects to the device','To set the name of the device','To encrypt the passwords','To display the configuration'],'MOTD = Message of the Day. Meist ein Hinweis, dass nur Berechtigte zugreifen dürfen.'],
+['ios','Why does a Layer 2 switch need an IP address?',1,['So that it can be managed remotely','So that it can forward frames','So that it can learn MAC addresses','So that hosts can use it as default gateway'],'Zum Weiterleiten braucht ein Switch keine IP. Die Adresse auf dem SVI (interface vlan 1) dient nur der Fernverwaltung.'],
+['ios','On which interface is the management IP address of a Layer 2 switch configured?',1,['On the switch virtual interface (interface vlan 1)','On the console port','On every physical port','On the first FastEthernet port'],'Das SVI ist ein virtuelles Interface. Mit ip address und no shutdown wird der Switch im Netz erreichbar.'],
+['ios','A switch must be manageable from other networks. Which command is needed in addition to the IP address on the SVI?',1,['ip default-gateway','ip route','ip routing','ipv6 unicast-routing'],'Wie ein PC braucht der Switch ein Default Gateway, um Antworten in fremde Netze schicken zu können.'],
+['ios','What does the Tab key do in the Cisco IOS command line?',1,['It completes a partly typed command','It shows the command history','It leaves configuration mode','It interrupts a running ping'],'Tab vervollständigt, wenn die Eingabe eindeutig ist. Das Fragezeichen (?) zeigt mögliche Befehle.'],
+['ios','Which key combination interrupts a running ping or traceroute on a Cisco device?',1,['Ctrl+Shift+6','Ctrl+Z','Ctrl+P','Tab'],'Ctrl+Shift+6 bricht Vorgänge wie ping, traceroute oder eine DNS-Suche ab.'],
+['ios','Which key combination takes you from any configuration mode straight back to privileged EXEC mode?',1,['Ctrl+Z','Ctrl+Shift+6','Ctrl+C in user EXEC mode','Tab'],'Ctrl+Z (oder der Befehl end) springt direkt zurück zu Router#. exit geht nur eine Ebene zurück.'],
+['ios','Which command gives a short overview of all interfaces with their IP addresses and status?',1,['show ip interface brief','show version','show running-config','show ip route'],'show ip interface brief: eine Zeile pro Interface mit Adresse und Status (up/down).'],
+['ios','Which command shows the IOS version, the uptime and the hardware of a device?',1,['show version','show interfaces','show startup-config','show protocols'],'show version: IOS-Version, Laufzeit, Speicher, Interfaces und Configuration Register.'],
+['ios','What does an exclamation mark (!) mean in the output of ping on a Cisco device?',1,['An echo reply was received','The request timed out','The destination is unreachable','The packet was fragmented'],'! = Antwort erhalten. . (Punkt) = Timeout. U = Destination unreachable.'],
+['ios','Which protocol does ping use to test connectivity?',1,['ICMP','TCP','UDP','ARP'],'Ping schickt ICMP Echo Request und wartet auf ICMP Echo Reply.'],
+['ios','What is the command traceroute (tracert on Windows) used for?',1,['To show every router on the path and where a packet stops','To show the MAC address of the destination','To renew the IP address','To test the local TCP/IP stack only'],'Traceroute listet alle Hops bis zum Ziel. So sieht man, an welcher Stelle der Weg abbricht.'],
+['ios','Which access method is used for the initial configuration of a new Cisco device?',1,['The console port','Telnet','SSH','A web browser'],'Ein neues Gerät hat noch keine IP-Adresse. Über den Console-Port (out-of-band) kommt man trotzdem direkt drauf.'],
+['ios','Which lines must be configured to control remote access by Telnet or SSH?',1,['The VTY lines (line vty 0 15)','The console line (line console 0)','The AUX line','The loopback interface'],'VTY = virtuelle Terminal-Lines für Fernzugriff. Die Console-Line ist der lokale Anschluss.'],
+['ios','A user can ping public IP addresses on the Internet but cannot open web sites by name. What is the most likely problem?',1,['DNS is not working or is configured incorrectly','The default gateway is wrong','The network cable is unplugged','The subnet mask is wrong'],'IP-Verbindung steht, nur Namen funktionieren nicht: Das zeigt auf die Namensauflösung (DNS).'],
+['ios','In which order should connectivity be tested with ping, from the nearest to the farthest point?',1,['Loopback → own IP address → default gateway → remote host','Remote host → default gateway → own IP address → loopback','Default gateway → loopback → remote host → own IP address','Own IP address → remote host → loopback → default gateway'],'Von innen nach außen: 127.0.0.1 (eigener Stack), eigene Adresse (Netzwerkkarte), Gateway (lokales Netz), dann das entfernte Ziel.'],
+['ios','What is the last step of the troubleshooting process?',1,['Document the findings, actions and results','Establish a theory of probable cause','Identify the problem','Test the theory'],'Reihenfolge: Problem erkennen → Theorie aufstellen → Theorie testen → Plan umsetzen → Lösung prüfen → dokumentieren.'],
+['ios','Which command lets an administrator see log and debug messages during a Telnet or SSH session?',1,['terminal monitor','show logging','debug all','logging console'],'Über die Console erscheinen Meldungen automatisch. In einer Fernsitzung muss man sie mit terminal monitor einschalten.'],
+['ios','Which command shows information about directly connected Cisco devices?',1,['show cdp neighbors','show ip route','show arp','show users'],'CDP (Cisco Discovery Protocol) meldet benachbarte Cisco-Geräte: Name, Port, Plattform.'],
+['ios','What is the effect of the command no ip domain-lookup?',1,['The device no longer tries to resolve mistyped commands as host names','The device stops forwarding DNS packets from hosts','The device deletes its hostname','The device disables DHCP'],'Ohne den Befehl hält IOS ein vertipptes Wort für einen Hostnamen und hängt sekundenlang bei der DNS-Suche.'],
+['ios','Which command changes the name of a Cisco device?',1,['hostname','name','banner motd','description'],'hostname NAME im globalen Konfigurationsmodus. Der Name erscheint danach im Prompt.'],
+['ios','Which command shows the configuration that is stored in NVRAM?',1,['show startup-config','show running-config','show flash','show version'],'show startup-config = gespeicherte Konfiguration (NVRAM). show running-config = aktuell aktive Konfiguration (RAM).'],
+['ios','Which commands protect the console port with a password?',1,['line console 0, password, login','enable secret, login','line vty 0 15, transport input ssh','interface console 0, no shutdown'],'In den Line-Modus wechseln, Passwort setzen und mit login die Abfrage aktivieren.'],
+];
+/* Cheat sheets: {id, t (topic colour), title, note (German), head, rows} */
+const SHEETS = [
+{id:'layers', t:'mod', title:'OSI and TCP/IP layers', note:'Merksatz von Schicht 1 nach 7: „Please Do Not Throw Sausage Pizza Away“. Die PDU-Namen und die Adresse jeder Schicht werden sehr oft gefragt.',
+ head:['OSI layer','TCP/IP layer','PDU','Address','Beispiele'],
+ rows:[
+ ['7 Application','Application','Data','–','HTTP, DNS, DHCP, FTP, SMTP'],
+ ['6 Presentation','Application','Data','–','Format, Kompression, Verschlüsselung'],
+ ['5 Session','Application','Data','–','Sitzungen auf- und abbauen'],
+ ['4 Transport','Transport','Segment','Port number','TCP, UDP'],
+ ['3 Network','Internet','Packet','IP address','IPv4, IPv6, ICMP, Router'],
+ ['2 Data Link','Network Access','Frame','MAC address','Ethernet, WLAN, Switch'],
+ ['1 Physical','Network Access','Bits','–','Kabel, Signale, Funk'],
+ ]},
+{id:'ports', t:'tra', title:'Port numbers', note:'Well-known: 0–1023 · Registered: 1024–49151 · Dynamic/private: 49152–65535. Clients wählen ihren Quellport zufällig aus dem dynamischen Bereich.',
+ head:['Port','Protocol','Transport','Wofür'],
+ rows:[
+ ['20 / 21','FTP','TCP','Dateien übertragen (20 Daten, 21 Steuerung)'],
+ ['22','SSH','TCP','Fernzugriff, verschlüsselt'],
+ ['23','Telnet','TCP','Fernzugriff, Klartext'],
+ ['25','SMTP','TCP','E-Mail senden'],
+ ['53','DNS','UDP (TCP)','Namen in IP-Adressen auflösen'],
+ ['67 / 68','DHCP','UDP','IP-Adressen automatisch vergeben (67 Server, 68 Client)'],
+ ['69','TFTP','UDP','Einfache Dateiübertragung ohne Login'],
+ ['80','HTTP','TCP','Webseiten'],
+ ['110','POP3','TCP','E-Mail abholen (herunterladen und löschen)'],
+ ['143','IMAP','TCP','E-Mail abholen (bleibt auf dem Server)'],
+ ['161','SNMP','UDP','Netzwerkgeräte überwachen'],
+ ['443','HTTPS','TCP','Webseiten, verschlüsselt mit TLS'],
+ ]},
+{id:'subnets', t:'ip4', title:'Subnet table', note:'Blockgröße = 256 − Wert im letzten Masken-Oktett, das nicht 255 ist. Nutzbare Hosts = 2^(Host-Bits) − 2.',
+ head:['Prefix','Subnet mask','Blockgröße','Adressen','Usable hosts'],
+ rows:(function(){const r=[];for(let p=16;p<=30;p++){const m=p===0?0:(0xFFFFFFFF<<(32-p))>>>0;const mask=[m>>>24,(m>>>16)&255,(m>>>8)&255,m&255];const io=p<=24?2:3;const blk=p%8===0?256:256-mask[Math.floor(p/8)];const n=Math.pow(2,32-p);r.push(['/'+p,mask.join('.'),blk+' (Oktett '+(p%8===0?p/8+1:Math.floor(p/8)+1)+')',n.toLocaleString('en-US'),(n-2).toLocaleString('en-US')]);void io;}return r;})()},
+{id:'special4', t:'ip4', title:'Special IPv4 addresses', note:'Private Adressen werden im Internet nicht geroutet und brauchen NAT.',
+ head:['Range','Name','Bedeutung'],
+ rows:[
+ ['10.0.0.0/8','Private','10.0.0.0 – 10.255.255.255'],
+ ['172.16.0.0/12','Private','172.16.0.0 – 172.31.255.255'],
+ ['192.168.0.0/16','Private','192.168.0.0 – 192.168.255.255'],
+ ['127.0.0.0/8','Loopback','Test des eigenen TCP/IP-Stacks (127.0.0.1)'],
+ ['169.254.0.0/16','Link-local (APIPA)','Selbst vergeben, wenn kein DHCP-Server antwortet'],
+ ['224.0.0.0 – 239.255.255.255','Multicast','An eine Gruppe von Hosts'],
+ ['255.255.255.255','Limited broadcast','An alle im eigenen Netz'],
+ ['0.0.0.0/0','Default route','Passt auf jedes Ziel (Gateway of last resort)'],
+ ]},
+{id:'ipv6', t:'ip6', title:'IPv6 address types', note:'Kürzen: führende Nullen je Hextet weglassen, eine Folge von Null-Hextets einmal durch :: ersetzen. IPv6 hat keinen Broadcast.',
+ head:['Prefix','Type','Bedeutung'],
+ rows:[
+ ['::1/128','Loopback','Wie 127.0.0.1'],
+ ['::/128','Unspecified','„Noch keine Adresse“'],
+ ['FE80::/10','Link-local','Pflicht auf jedem Interface, nur im eigenen Link gültig'],
+ ['FC00::/7','Unique local','Intern, wie private IPv4-Adressen (FC.. / FD..)'],
+ ['2000::/3','Global unicast','Öffentlich, im Internet routbar (beginnt mit 2 oder 3)'],
+ ['FF00::/8','Multicast','An eine Gruppe'],
+ ['FF02::1','All-nodes multicast','Alle IPv6-Geräte im Link'],
+ ['FF02::2','All-routers multicast','Alle IPv6-Router im Link'],
+ ['2001:DB8::/32','Documentation','Nur für Beispiele und Dokumentation'],
+ ]},
+{id:'tcpudp', t:'tra', title:'TCP versus UDP', note:'TCP = zuverlässig, aber mehr Aufwand. UDP = schnell, aber ohne Garantie.',
+ head:['','TCP','UDP'],
+ rows:[
+ ['Verbindung','Connection-oriented (3-way handshake)','Connectionless'],
+ ['Zuverlässigkeit','Acknowledgments und Retransmission','Best effort, keine Wiederholung'],
+ ['Reihenfolge','Sequence numbers sortieren die Daten','Keine Sortierung'],
+ ['Flow control','Window size','Keine'],
+ ['Header','20 Byte','8 Byte'],
+ ['PDU','Segment','Datagram'],
+ ['Typische Nutzung','HTTP, HTTPS, FTP, SMTP, SSH','DNS, DHCP, TFTP, VoIP, Video'],
+ ]},
+{id:'process', t:'app', title:'Processes in the right order', note:'Reihenfolgen werden gern als Zuordnungsfrage gestellt.',
+ head:['Process','Steps'],
+ rows:[
+ ['TCP connection setup','SYN → SYN-ACK → ACK'],
+ ['TCP connection teardown','FIN → ACK → FIN → ACK'],
+ ['DHCP (DORA)','Discover → Offer → Request → Acknowledge'],
+ ['Router boot','POST → Bootstrap → IOS laden → Konfiguration laden'],
+ ['Encapsulation','Data → Segment → Packet → Frame → Bits'],
+ ['ARP','Request (Broadcast) → Reply (Unicast)'],
+ ['IPv6 neighbour discovery','Neighbor Solicitation → Neighbor Advertisement'],
+ ['IPv6 router discovery','Router Solicitation → Router Advertisement'],
+ ['Troubleshooting','Problem erkennen → Theorie → Testen → Plan umsetzen → Prüfen → Dokumentieren'],
+ ]},
+{id:'modes', t:'ios', title:'IOS modes and prompts', note:'Ctrl+Z oder end springt direkt zurück zu #. exit geht eine Ebene zurück.',
+ head:['Prompt','Mode','So kommt man hinein'],
+ rows:[
+ ['Router>','User EXEC','Nach dem Anmelden'],
+ ['Router#','Privileged EXEC','enable'],
+ ['Router(config)#','Global configuration','configure terminal'],
+ ['Router(config-if)#','Interface configuration','interface g0/0'],
+ ['Router(config-line)#','Line configuration','line console 0 / line vty 0 15'],
+ ]},
+{id:'commands', t:'ios', title:'IOS commands', note:'Speicherorte: running-config im RAM, startup-config im NVRAM, IOS im Flash, Bootstrap im ROM.',
+ head:['Command','Was es tut'],
+ rows:[
+ ['hostname R1','Gerätenamen setzen'],
+ ['enable secret PASS','Verschlüsseltes Passwort für den privileged EXEC mode'],
+ ['service password-encryption','Klartext-Passwörter in der Konfiguration verschlüsseln'],
+ ['banner motd #Text#','Warnhinweis beim Verbinden anzeigen'],
+ ['line console 0 → password → login','Console-Zugang mit Passwort schützen'],
+ ['line vty 0 15 → transport input ssh','Fernzugriff nur per SSH erlauben'],
+ ['interface vlan 1 → ip address … → no shutdown','Management-Adresse eines Switches (SVI)'],
+ ['ip default-gateway 192.168.1.1','Gateway für die Fernverwaltung eines Switches'],
+ ['no shutdown','Interface einschalten'],
+ ['ipv6 unicast-routing','IPv6-Routing auf dem Router aktivieren'],
+ ['copy running-config startup-config','Konfiguration dauerhaft speichern'],
+ ['show running-config','Aktive Konfiguration (RAM)'],
+ ['show startup-config','Gespeicherte Konfiguration (NVRAM)'],
+ ['show ip interface brief','Kurzübersicht: Interfaces, Adressen, Status'],
+ ['show ip route','Routing-Tabelle'],
+ ['show version','IOS-Version, Laufzeit, Hardware'],
+ ['show cdp neighbors','Direkt verbundene Cisco-Geräte'],
+ ['terminal monitor','Log-Meldungen in einer Telnet/SSH-Sitzung anzeigen'],
+ ['ping / traceroute','Erreichbarkeit testen / Weg anzeigen'],
+ ]},
+{id:'pc', t:'app', title:'PC commands', note:'Auf Windows. Unter Linux und macOS heißt tracert „traceroute“ und ipconfig „ifconfig“ oder „ip address“.',
+ head:['Command','Was es tut'],
+ rows:[
+ ['ipconfig','IP-Adresse, Maske, Gateway'],
+ ['ipconfig /all','Zusätzlich MAC-Adresse, DHCP- und DNS-Server'],
+ ['ipconfig /release · /renew','DHCP-Adresse zurückgeben · neu anfordern'],
+ ['ipconfig /displaydns','DNS-Cache anzeigen'],
+ ['ping 127.0.0.1','Eigenen TCP/IP-Stack testen'],
+ ['tracert ZIEL','Weg (Hops) zum Ziel anzeigen'],
+ ['nslookup NAME','DNS-Server abfragen'],
+ ['arp -a','ARP-Cache (IP → MAC) anzeigen'],
+ ['netstat','Aktive TCP-Verbindungen anzeigen'],
+ ['netstat -r · route print','Routing-Tabelle des PCs'],
+ ]},
+{id:'media', t:'phy', title:'Cables and media', note:'Bandwidth = Kapazität · Throughput = tatsächlich gemessen · Goodput = Throughput minus Overhead.',
+ head:['Medium / cable','Merkmal','Einsatz'],
+ rows:[
+ ['UTP straight-through','Beide Enden gleich belegt','Ungleiche Geräte: PC–Switch, Switch–Router'],
+ ['UTP crossover','T568A auf einer, T568B auf der anderen Seite','Gleiche Geräte: Switch–Switch, PC–PC'],
+ ['Rollover (console)','Pins gespiegelt','PC an den Console-Port'],
+ ['STP','Abgeschirmt gegen EMI/RFI, teurer','Umgebungen mit starken Störungen'],
+ ['Fiber single-mode','Laser, sehr dünner Kern','Lange Strecken (Kilometer)'],
+ ['Fiber multimode','LED, dickerer Kern','Kurze Strecken (Gebäude, Campus)'],
+ ['Wireless 802.11','Funk; Reichweite, Störungen und Sicherheit beachten','WLAN'],
+ ]},
+{id:'attacks', t:'sec', title:'Threats and attacks', note:'AAA: Authentication (wer?) · Authorization (was darf er?) · Accounting (was hat er getan?).',
+ head:['Term','Bedeutung'],
+ rows:[
+ ['Virus','Hängt an einem Programm, braucht dessen Ausführung'],
+ ['Worm','Verbreitet sich selbstständig über das Netz'],
+ ['Trojan horse','Tarnt sich als nützliches Programm'],
+ ['Reconnaissance attack','Auskundschaften: ping sweep, port scan'],
+ ['Access attack','Eindringen: Passwortangriff, trust exploitation, port redirection, man-in-the-middle'],
+ ['DoS / DDoS','Dienst lahmlegen / von vielen Quellen gleichzeitig'],
+ ['Zero-day','Lücke wird ausgenutzt, bevor es einen Patch gibt'],
+ ['Physical threats','Hardware · Environmental · Electrical · Maintenance'],
+ ['Firewall types','Packet filtering (Adressen) · Application filtering (Ports) · URL filtering · Stateful packet inspection'],
+ ]},
+];
+(function(){
+'use strict';
+
+/* ───────── data ───────── */
+const TOPICS=[
+ {id:'mod',name:'Models & basics',de:'OSI, TCP/IP, Protokolle, Netzwerkarten',color:'#4da3ff'},
+ {id:'phy',name:'Physical layer',de:'Kabel, Glasfaser, Funk, Bandbreite',color:'#c9a27e'},
+ {id:'eth',name:'Ethernet & switching',de:'MAC-Adressen, Frames, Switches, ARP',color:'#5ac8f5'},
+ {id:'ip4',name:'IPv4 & subnetting',de:'Adressen, Masken, Subnetze berechnen',color:'#ff7eb6'},
+ {id:'ip6',name:'IPv6',de:'Adresstypen, Kürzen, SLAAC, ICMPv6',color:'#c08bff'},
+ {id:'rte',name:'Routing',de:'Router, Routing-Tabelle, Default Gateway',color:'#8b8dff'},
+ {id:'tra',name:'Transport layer',de:'TCP, UDP, Ports',color:'#5fe0d0'},
+ {id:'app',name:'Application layer',de:'DNS, DHCP, HTTP, E-Mail',color:'#b8e04a'},
+ {id:'sec',name:'Security',de:'Angriffe, Malware, Geräte absichern',color:'#ff9d8a'},
+ {id:'ios',name:'Cisco IOS',de:'Befehle, Modi, Fehlersuche',color:'#d1d1d6'},
+ {id:'imp',name:'Imported',de:'Von dir eingefügte Fragen',color:'#f5f5f7'}
+];
+const T={}; TOPICS.forEach(t=>T[t.id]=t);
+
+function hash(s){let x=5381;for(let i=0;i<s.length;i++)x=((x<<5)+x+s.charCodeAt(i))|0;return (x>>>0).toString(36);}
+const BUILTIN=BANK.map(r=>({id:'b'+hash(r[1]),t:r[0],q:r[1],o:r[3],c:r[3].slice(0,r[2]).map((_,i)=>i),e:r[4]}));
+
+const mem={};
+const store={
+ get(k,d){try{const v=localStorage.getItem('ccna.'+k);if(v!=null)return JSON.parse(v);}catch(e){}return k in mem?mem[k]:d;},
+ set(k,v){mem[k]=v;try{localStorage.setItem('ccna.'+k,JSON.stringify(v));}catch(e){}}
+};
+let prog=store.get('prog',{}), stars=store.get('stars',{}), imported=store.get('imported',[]), pool=store.get('pool','builtin');
+if(!imported.length) pool='builtin';
+
+function questions(){return pool==='imported'?imported:pool==='all'?BUILTIN.concat(imported):BUILTIN;}
+function status(q){const p=prog[q.id];if(!p||!p.n)return 'new';return p.s>=2?'known':'shaky';}
+function mark(q,ok){const p=prog[q.id]||(prog[q.id]={n:0,s:0,w:0,last:0});p.n++;if(ok)p.s++;else{p.s=0;p.w++;}p.last=Date.now();store.set('prog',prog);}
+function counts(list){const c={new:0,shaky:0,known:0,all:list.length};list.forEach(q=>c[status(q)]++);return c;}
+function gradable(q){return q.o.length>1&&q.c.length>0;}
+
+/* ───────── helpers ───────── */
+function h(tag,attrs){
+ const e=document.createElement(tag);
+ if(attrs)for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;
+  if(k==='class')e.className=v;
+  else if(k==='style'){for(const s in v){if(s.slice(0,2)==='--')e.style.setProperty(s,v[s]);else e.style[s]=v[s];}}
+  else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),v);
+  else if(k==='value')e.value=v;
+  else e.setAttribute(k,v===true?'':v);}
+ for(let i=2;i<arguments.length;i++)add(e,arguments[i]);
+ return e;
+}
+function add(e,c){if(c==null||c===false||c===true)return;if(Array.isArray(c)){c.forEach(x=>add(e,x));return;}e.append(c.nodeType?c:document.createTextNode(String(c)));}
+const SVG={
+ check:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+ cross:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>',
+ star:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.2-4.1 5.8-.8z"/></svg>',
+ starOn:'<svg class="ico" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.2-4.1 5.8-.8z"/></svg>'
+};
+function icon(n){const d=document.createElement('div');d.innerHTML=SVG[n];return d.firstChild;}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function rnd(n){return Math.floor(Math.random()*n);}
+function setEq(set,arr){return set.size===arr.length&&arr.every(x=>set.has(x));}
+function pill(q){const s=status(q);return h('span',{class:'pill '+s},s==='new'?'New':s==='shaky'?'Shaky':'Known');}
+function starBtn(q,after){const on=!!stars[q.id];return h('button',{class:'star'+(on?' on':''),type:'button','aria-label':on?'Remove bookmark':'Bookmark this question','aria-pressed':String(on),onclick:e=>{e.stopPropagation();if(stars[q.id])delete stars[q.id];else stars[q.id]=1;store.set('stars',stars);(after||render)();}},icon(on?'starOn':'star'));}
+function bar(c,thin){return h('div',{class:'bar'+(thin?' thin':''),role:'img','aria-label':c.known+' known, '+c.shaky+' shaky, '+c.new+' new'},h('i',{class:'k',style:{width:(c.all?c.known/c.all*100:0)+'%'}}),h('i',{class:'s',style:{width:(c.all?c.shaky/c.all*100:0)+'%'}}));}
+function imgs(q){return (q.img||[]).map(src=>h('img',{class:'qimg',src:src,alt:'Exhibit for this question',loading:'lazy',referrerpolicy:'no-referrer'}));}
+function why(q){if(!q.e)return null;return h('div',{class:'why'},h('b',null,q.t==='imp'?'Explanation':'Warum?'),h('span',{style:{whiteSpace:'pre-wrap'}},q.e));}
+
+/* ───────── state & router ───────── */
+const S={view:'home',sess:null,exam:null,result:null,note:'',keys:null,tick:0,
+ browse:{q:'',topic:'',status:'',star:false,open:null},sub:null,imp:null};
+const app=document.getElementById('app');
+const VIEWS={};
+function render(){clearInterval(S.tick);S.keys=null;app.replaceChildren(VIEWS[S.view]());tabs();}
+function go(v){S.view=v;render();window.scrollTo(0,0);}
+function tabs(){
+ const m=S.sess&&(S.view==='sess'||S.view==='done')?S.sess.mode:'';
+ const items=[['Home',S.view==='home',()=>go('home')],['Learn',m==='learn',()=>startSession('learn')],['Quiz',m==='quiz',()=>startSession('quiz')],
+  ['Exam',S.view==='exam'||S.view==='result',()=>{S.exam=null;go('exam');}],['Cheat sheets',S.view==='sheets',()=>go('sheets')],
+  ['Subnetting',S.view==='subnet',()=>go('subnet')],['Search',S.view==='browse',()=>go('browse')]];
+ document.getElementById('tabs').replaceChildren(...items.map(x=>h('button',{class:'tab'+(x[1]?' on':''),type:'button','aria-current':x[1]?'page':null,onclick:x[2]},x[0])));
+}
+document.getElementById('brand').addEventListener('click',()=>go('home'));
+document.addEventListener('keydown',e=>{
+ if(!S.keys||e.metaKey||e.ctrlKey||e.altKey)return;
+ const t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||e.target.isContentEditable)return;
+ if(e.key==='Enter'&&t==='BUTTON')return;
+ S.keys(e);
+});
+function optKey(e,n){const k=e.key.toLowerCase();let i=-1;if(/^[1-9]$/.test(k))i=+k-1;else if(/^[a-h]$/.test(k))i=k.charCodeAt(0)-97;return i>=0&&i<n?i:-1;}
+
+/* ───────── option list ───────── */
+function optList(q,order,sel,o){
+ return h('div',{class:'opts'},order.map((oi,i)=>{
+  const isC=q.c.indexOf(oi)>=0,isS=sel.has(oi);let cls='opt',tag='',badge=String.fromCharCode(65+i);
+  if(o.reveal){
+   if(isC){cls+=' ok';badge=icon('check');if(!isS&&!o.learn){cls+=' miss';tag='Correct answer';}else tag='Correct';}
+   else if(isS){cls+=' bad';badge=icon('cross');tag='Your answer';}
+  }else if(isS)cls+=' sel';
+  return h('button',{class:cls,type:'button',disabled:!o.pick,'aria-pressed':o.pick?String(isS):null,onclick:o.pick?()=>o.pick(oi):null},
+   h('span',{class:'k'},badge),h('span',{class:'t'},q.o[oi]),tag?h('span',{class:'tag'},tag):null);
+ }));
+}
+
+/* ───────── home ───────── */
+function mondayLine(){
+ const d=new Date();if(d.getDay()===1)return 'It is Monday. Good luck.';
+ const m=new Date(d);m.setDate(d.getDate()+((8-d.getDay())%7||7));m.setHours(0,0,0,0);
+ const hrs=Math.round((m-d)/36e5);return hrs<48?'Monday starts in '+hrs+' hours.':'Monday starts in '+Math.round(hrs/24)+' days.';
+}
+VIEWS.home=function(){
+ const all=questions(),c=counts(all);
+ const note=S.note;S.note='';
+ const poolSeg=imported.length?h('div',{class:'row',style:{marginTop:'28px'}},h('span',{class:'small muted'},'Question pool'),
+   h('div',{class:'seg',role:'group','aria-label':'Question pool'},[['builtin','Built-in ('+BUILTIN.length+')'],['imported','Imported ('+imported.length+')'],['all','Both']].map(x=>
+    h('button',{type:'button',class:pool===x[0]?'on':'','aria-pressed':String(pool===x[0]),onclick:()=>{pool=x[0];store.set('pool',pool);render();}},x[1])))):null;
+ const topicIds=TOPICS.filter(t=>all.some(q=>q.t===t.id));
+ return h('div',{class:'page'},
+  h('section',{class:'hero'},
+   h('p',{class:'eyebrow'},'CCNA 1 · Introduction to Networks'),
+   h('h1',null,'Know it by Monday.'),
+   h('p',{class:'sub'},all.length+' questions in short rounds. Every answer comes with a plain explanation in German, and what you get wrong comes back until it sticks.'),
+   h('div',{class:'row',style:{marginTop:'30px'}},
+    h('button',{class:'btn primary',type:'button',onclick:()=>startSession('learn')},c.new===all.length?'Start learning':'Continue learning'),
+    h('button',{class:'btn ghost',type:'button',onclick:()=>startSession('quiz')},'Quiz me')),
+   h('p',{class:'tiny',style:{marginTop:'16px'}},mondayLine()),
+   note?h('p',{class:'small',style:{marginTop:'16px',color:'var(--warn)'},role:'status'},note):null,
+   h('div',{class:'stats'},
+    h('div',{class:'stat'},h('div',{class:'n',style:{color:'var(--ok)'}},c.known),h('div',{class:'l'},'Known')),
+    h('div',{class:'stat'},h('div',{class:'n',style:{color:'var(--warn)'}},c.shaky),h('div',{class:'l'},'Shaky')),
+    h('div',{class:'stat'},h('div',{class:'n'},c.new),h('div',{class:'l'},'New'))),
+   bar(c),
+   h('p',{class:'tiny',style:{marginTop:'12px'}},'Known = answered right twice in a row. Shaky = seen, but not safe yet.'),
+   poolSeg),
+  h('h2',{class:'h2'},'Topics.'),
+  h('div',{class:'grid'},topicIds.map(t=>{
+   const list=all.filter(q=>q.t===t.id),tc=counts(list);
+   return h('article',{class:'card tcard',style:{'--c':t.color}},
+    h('h3',{class:'name'},h('span',{class:'dot'}),t.name),
+    h('p',{class:'muted small'},t.de),
+    bar(tc,true),
+    h('p',{class:'small muted',style:{marginTop:'8px'}},tc.known+' of '+tc.all+' known'+(tc.shaky?' · '+tc.shaky+' shaky':'')),
+    h('div',{class:'row tfoot'},
+     h('button',{class:'btn dark sm',type:'button',onclick:()=>startSession('learn',{topic:t.id})},'Learn'),
+     h('button',{class:'btn ghost sm',type:'button',onclick:()=>startSession('quiz',{topic:t.id})},'Quiz')));
+  })),
+  h('h2',{class:'h2'},'Tools.'),
+  h('div',{class:'grid'},[
+   ['Exam simulation','Timed, random questions, score at the end.','Start an exam',()=>{S.exam=null;go('exam');}],
+   ['Repeat my mistakes',c.shaky?c.shaky+' shaky questions are waiting.':'Nothing shaky right now.','Practise them',()=>startSession('quiz',{only:'shaky',size:15})],
+   ['Cheat sheets','Ports, layers, subnet table, IPv6, IOS commands.','Open the sheets',()=>go('sheets')],
+   ['Subnetting trainer','Endless calculations with the solution step by step.','Start calculating',()=>go('subnet')],
+   ['Search and bookmarks','Find any question, see the answer, star it.','Browse questions',()=>go('browse')],
+   ['Import questions',imported.length?imported.length+' imported questions in your trainer.':'Paste questions you copied from a web page.','Open import',()=>go('import')]
+  ].map(x=>h('button',{class:'card tool',type:'button',onclick:x[3]},h('span',null,h('span',{class:'h3',style:{display:'block'}},x[0]),h('span',{class:'muted',style:{display:'block',marginTop:'6px'}},x[1])),h('span',{class:'go'},x[2]+' ›')))),
+  h('footer',{class:'foot'},
+   h('span',null,'Progress is saved in this browser on this device.'),
+   h('button',{class:'link',type:'button',onclick:()=>{if(confirm('Reset all progress and bookmarks?')){prog={};stars={};store.set('prog',prog);store.set('stars',stars);render();}}},'Reset progress')));
+};
+
+/* ───────── learn & quiz rounds ───────── */
+function pick(list,n,pref){
+ const byLast=(a,b)=>((prog[a.id]||{}).last||0)-((prog[b.id]||{}).last||0);
+ const nw=list.filter(q=>status(q)==='new'),sh=list.filter(q=>status(q)==='shaky').sort(byLast),kn=list.filter(q=>status(q)==='known').sort(byLast);
+ const half=Math.ceil(n/2);
+ const order=pref==='new'?[nw.slice(0,n-Math.min(3,sh.length)),sh,nw.slice(n-Math.min(3,sh.length)),kn]:[sh.slice(0,half),nw,sh.slice(half),kn];
+ const out=[];order.forEach(g=>g.forEach(q=>{if(out.length<n&&out.indexOf(q)<0)out.push(q);}));
+ return out;
+}
+function startSession(mode,o){
+ o=o||{};let list;
+ if(o.list)list=o.list.slice();
+ else{let p=questions().filter(q=>!o.topic||q.t===o.topic);if(o.only==='shaky')p=p.filter(q=>status(q)==='shaky');list=pick(p,o.size||10,mode==='learn'?'new':'shaky');}
+ if(!list.length){S.note=o.only==='shaky'?'Nothing shaky right now. Shaky questions appear after you have answered some.':'No questions in this selection.';return go('home');}
+ S.sess={mode:mode,o:o,queue:list,done:0,right:0,wrong:0,again:{},cur:null};
+ nextCard();
+}
+function nextCard(){
+ const s=S.sess;if(!s.queue.length)return go('done');
+ const q=s.queue.shift();
+ s.cur={q:q,order:shuffle(q.o.map((_,i)=>i)),sel:new Set(),phase:'ask',ok:null};
+ go('sess');
+}
+function answer(ok){
+ const s=S.sess,c=s.cur;c.ok=ok;mark(c.q,ok);
+ if(ok)s.right++;else{s.wrong++;s.again[c.q.id]=(s.again[c.q.id]||0)+1;if(s.again[c.q.id]<=2)s.queue.splice(Math.min(3,s.queue.length),0,c.q);}
+}
+function advance(){S.sess.done++;nextCard();}
+VIEWS.sess=function(){
+ const s=S.sess,c=s.cur,q=c.q,t=T[q.t]||T.imp,shown=c.phase==='shown',flash=s.mode==='learn'||!gradable(q),multi=q.c.length>1;
+ const total=s.done+s.queue.length+1;
+ let body,actions;
+ if(flash){
+  body=q.o.length?optList(q,c.order,new Set(),{reveal:shown,learn:true}):null;
+  if(!shown){
+   actions=h('div',{class:'row'},h('button',{class:'btn primary',type:'button',onclick:()=>{c.phase='shown';render();}},'Show answer'));
+   S.keys=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.phase='shown';render();}};
+  }else{
+   actions=h('div',{class:'row'},
+    h('button',{class:'btn dark',type:'button',onclick:()=>{answer(false);advance();}},'Not yet'),
+    h('button',{class:'btn primary',type:'button',onclick:()=>{answer(true);advance();}},'I knew it'));
+   S.keys=e=>{if(e.key==='Enter'){answer(true);advance();}else if(e.key==='Backspace'||e.key.toLowerCase()==='n'){answer(false);advance();}};
+  }
+ }else{
+  const pickOpt=oi=>{if(multi){if(c.sel.has(oi))c.sel.delete(oi);else c.sel.add(oi);}else{c.sel=new Set([oi]);}render();};
+  const ready=multi?c.sel.size===q.c.length:c.sel.size===1;
+  const check=()=>{c.phase='shown';answer(setEq(c.sel,q.c));render();};
+  body=optList(q,c.order,c.sel,{reveal:shown,pick:shown?null:pickOpt});
+  if(!shown){
+   actions=h('div',{class:'row'},h('button',{class:'btn primary',type:'button',disabled:!ready,onclick:check},'Check'),
+    h('button',{class:'btn dark',type:'button',onclick:()=>{c.sel=new Set();check();}},'I don’t know'));
+   S.keys=e=>{const i=optKey(e,c.order.length);if(i>=0)pickOpt(c.order[i]);else if(e.key==='Enter'&&ready)check();};
+  }else{
+   actions=h('div',{class:'row'},h('button',{class:'btn primary',type:'button',onclick:advance},s.queue.length?'Next question':'Finish round'));
+   S.keys=e=>{if(e.key==='Enter')advance();};
+  }
+ }
+ const verdict=shown&&!flash?h('p',{class:'verdict '+(c.ok?'ok':'bad'),role:'status'},icon(c.ok?'check':'cross'),c.ok?'Right.':'Not quite. This one comes back in a moment.'):null;
+ return h('section',{class:'sess narrow',style:{'--c':t.color}},
+  h('div',{class:'shead'},h('span',{class:'chip'},h('span',{class:'dot'}),t.name),pill(q),
+   h('span',{class:'sp'},h('span',{class:'small muted'},(s.done+1)+' / '+total),starBtn(q))),
+  h('div',{class:'prog'},h('i',{style:{width:(s.done/total*100)+'%'}})),
+  h('h1',{class:'q'},q.q),
+  multi&&!shown&&!flash?h('p',{class:'hint'},'Select '+q.c.length+' answers.'):null,
+  imgs(q),
+  body||h('div',{style:{height:'28px'}}),
+  verdict,
+  shown?why(q):null,
+  shown&&flash&&!q.e&&!q.c.length?h('p',{class:'muted',style:{marginBottom:'22px'}},'No marked answer was found for this imported question.'):null,
+  actions,
+  h('p',{class:'tiny',style:{marginTop:'26px'}},flash?'Keys: Enter shows the answer, then Enter = I knew it, N = Not yet.':'Keys: 1–'+c.order.length+' or A–'+String.fromCharCode(64+c.order.length)+' select, Enter checks.'));
+};
+VIEWS.done=function(){
+ const s=S.sess,c=counts(questions());
+ return h('section',{class:'sess narrow center',style:{paddingTop:'72px'}},
+  h('p',{class:'eyebrow'},s.mode==='learn'?'Learning round finished':'Quiz round finished'),
+  h('p',{class:'big',style:{margin:'10px 0 6px'}},s.right),
+  h('p',{class:'muted'},(s.right===1?'answer right':'answers right')+(s.wrong?' · '+s.wrong+' missed and repeated':'')),
+  h('div',{class:'narrow',style:{maxWidth:'420px',margin:'34px auto 0'}},bar(c),h('p',{class:'small muted',style:{marginTop:'10px'}},c.known+' known · '+c.shaky+' shaky · '+c.new+' new')),
+  h('div',{class:'row',style:{justifyContent:'center',marginTop:'36px'}},
+   h('button',{class:'btn primary',type:'button',onclick:()=>startSession(s.mode,s.o.list?{}:s.o)},'Next round'),
+   h('button',{class:'btn dark',type:'button',onclick:()=>go('home')},'Home')));
+};
+
+/* ───────── exam ───────── */
+VIEWS.exam=function(){
+ if(!S.exam)return examSetup();
+ const x=S.exam,q=x.qs[x.i],t=T[q.t]||T.imp,sel=x.ans[q.id]||(x.ans[q.id]=new Set()),multi=q.c.length>1;
+ const pickOpt=oi=>{if(multi){if(sel.has(oi))sel.delete(oi);else sel.add(oi);}else{sel.clear();sel.add(oi);}render();};
+ const timer=h('span',{class:'timer',role:'timer','aria-label':'Time left'});
+ const upd=()=>{const left=Math.max(0,Math.round((x.end-Date.now())/1000));timer.textContent=Math.floor(left/60)+':'+('0'+left%60).slice(-2);timer.style.color=left<120?'var(--bad)':'';if(left<=0)finishExam();};
+ const move=d=>{x.i=Math.max(0,Math.min(x.qs.length-1,x.i+d));render();window.scrollTo(0,0);};
+ const finish=()=>{const open=x.qs.filter(k=>!(x.ans[k.id]&&x.ans[k.id].size)).length;if(!open||confirm(open+' questions are unanswered. Finish anyway?'))finishExam();};
+ S.keys=e=>{const i=optKey(e,x.order[q.id].length);if(i>=0)pickOpt(x.order[q.id][i]);else if(e.key==='Enter'||e.key==='ArrowRight')move(1);else if(e.key==='ArrowLeft')move(-1);};
+ const el=h('section',{class:'sess narrow',style:{'--c':t.color}},
+  h('div',{class:'shead'},h('span',{class:'chip',style:{'--c':'#f5f5f7'}},'Exam'),h('span',{class:'small muted'},'Question '+(x.i+1)+' of '+x.qs.length),h('span',{class:'sp'},timer)),
+  h('div',{class:'prog'},h('i',{style:{width:((x.i+1)/x.qs.length*100)+'%',background:'var(--tx)'}})),
+  h('h1',{class:'q'},q.q),
+  multi?h('p',{class:'hint'},'Select '+q.c.length+' answers.'):null,
+  imgs(q),
+  optList(q,x.order[q.id],sel,{pick:pickOpt}),
+  h('div',{class:'spread'},
+   h('div',{class:'row'},h('button',{class:'btn dark',type:'button',disabled:x.i===0,onclick:()=>move(-1)},'Back'),
+    x.i<x.qs.length-1?h('button',{class:'btn primary',type:'button',onclick:()=>move(1)},'Next'):h('button',{class:'btn primary',type:'button',onclick:finish},'Finish exam')),
+   x.i<x.qs.length-1?h('button',{class:'btn ghost',type:'button',onclick:finish},'Finish exam'):null),
+  h('div',{class:'pal','aria-label':'All questions'},x.qs.map((k,i)=>h('button',{type:'button',class:(x.ans[k.id]&&x.ans[k.id].size?'done':'')+(i===x.i?' cur':''),'aria-label':'Question '+(i+1)+(x.ans[k.id]&&x.ans[k.id].size?', answered':''),onclick:()=>{x.i=i;render();window.scrollTo(0,0);}},i+1))));
+ upd();S.tick=setInterval(upd,1000);
+ return el;
+};
+function examSetup(){
+ const avail=questions().filter(gradable);
+ const sizes=[20,40,60].filter(n=>n<=avail.length);if(!sizes.length)sizes.push(avail.length);
+ if(!S.examN||sizes.indexOf(S.examN)<0)S.examN=sizes[Math.min(1,sizes.length-1)];
+ return h('section',{class:'sess narrow',style:{paddingTop:'56px'}},
+  h('p',{class:'eyebrow'},'Exam simulation'),
+  h('h1',{class:'h2',style:{marginTop:'6px'}},'Test yourself under exam conditions.'),
+  h('p',{class:'muted',style:{maxWidth:'600px'}},'Random questions from all topics, one minute per question, no feedback until the end. Afterwards you see your score, your weakest topics and every mistake with its explanation.'),
+  h('div',{class:'row',style:{margin:'30px 0'}},h('span',{class:'small muted'},'Questions'),
+   h('div',{class:'seg',role:'group','aria-label':'Number of questions'},sizes.map(n=>h('button',{type:'button',class:S.examN===n?'on':'','aria-pressed':String(S.examN===n),onclick:()=>{S.examN=n;render();}},n)))),
+  h('p',{class:'small muted',style:{marginBottom:'26px'}},S.examN+' questions · '+S.examN+' minutes · target 70% (my own practice target, not an official pass mark)'),
+  h('button',{class:'btn primary',type:'button',onclick:()=>{
+   const qs=shuffle(avail).slice(0,S.examN),order={};qs.forEach(q=>order[q.id]=shuffle(q.o.map((_,i)=>i)));
+   S.exam={qs:qs,order:order,ans:{},i:0,start:Date.now(),end:Date.now()+S.examN*60000};go('exam');}},'Start exam'));
+}
+function finishExam(){
+ const x=S.exam;if(!x)return;clearInterval(S.tick);
+ const items=x.qs.map(q=>{const sel=x.ans[q.id]||new Set(),ok=setEq(sel,q.c);mark(q,ok);return {q:q,order:x.order[q.id],sel:sel,ok:ok};});
+ S.result={items:items,right:items.filter(i=>i.ok).length,secs:Math.round((Math.min(Date.now(),x.end)-x.start)/1000)};
+ S.exam=null;go('result');
+}
+VIEWS.result=function(){
+ const r=S.result,n=r.items.length,pct=Math.round(r.right/n*100),pass=pct>=70,wrong=r.items.filter(i=>!i.ok);
+ const per=TOPICS.map(t=>{const it=r.items.filter(i=>i.q.t===t.id);return {t:t,n:it.length,r:it.filter(i=>i.ok).length};}).filter(p=>p.n).sort((a,b)=>a.r/a.n-b.r/b.n);
+ return h('section',{class:'narrow',style:{paddingTop:'64px'}},
+  h('div',{class:'center'},
+   h('p',{class:'eyebrow'},'Exam result'),
+   h('p',{class:'big',style:{margin:'8px 0',color:pass?'var(--ok)':'var(--warn)'}},pct+'%'),
+   h('p',{class:'h3'},pass?'Target reached.':'Not there yet.'),
+   h('p',{class:'muted',style:{marginTop:'6px'}},r.right+' of '+n+' right · '+Math.floor(r.secs/60)+' min '+r.secs%60+' s · target 70%'),
+   h('div',{class:'row',style:{justifyContent:'center',marginTop:'28px'}},
+    wrong.length?h('button',{class:'btn primary',type:'button',onclick:()=>startSession('quiz',{list:wrong.map(i=>i.q)})},'Practise my mistakes'):null,
+    h('button',{class:'btn '+(wrong.length?'dark':'primary'),type:'button',onclick:()=>{S.exam=null;go('exam');}},'New exam'),
+    h('button',{class:'btn dark',type:'button',onclick:()=>go('home')},'Home'))),
+  h('h2',{class:'h2'},'By topic.'),
+  h('div',{class:'card',style:{gap:'16px'}},per.map(p=>h('div',{style:{'--c':p.t.color}},
+   h('div',{class:'spread'},h('span',{style:{display:'inline-flex',alignItems:'center',gap:'10px'}},h('span',{class:'dot'}),p.t.name),h('span',{class:'small muted'},p.r+' / '+p.n)),
+   h('div',{class:'bar thin',style:{marginTop:'8px'}},h('i',{style:{width:(p.r/p.n*100)+'%',background:'var(--c)'}}))))),
+  wrong.length?[h('h2',{class:'h2'},'Your mistakes.'),wrong.map(i=>h('div',{class:'card',style:{marginBottom:'14px','--c':(T[i.q.t]||T.imp).color}},
+   h('div',{class:'row'},h('span',{class:'chip'},h('span',{class:'dot'}),(T[i.q.t]||T.imp).name),i.sel.size?null:h('span',{class:'pill'},'Not answered')),
+   h('h3',{class:'h3',style:{margin:'10px 0 0',whiteSpace:'pre-wrap'}},i.q.q),
+   imgs(i.q),optList(i.q,i.order,i.sel,{reveal:true}),why(i.q)))]:null);
+};
+
+/* ───────── cheat sheets ───────── */
+VIEWS.sheets=function(){
+ return h('section',{class:'page'},
+  h('h1',{class:'h2'},'Cheat sheets.'),
+  h('p',{class:'muted',style:{maxWidth:'640px'}},'Das sind die Dinge, die man einfach auswendig wissen muss. Einmal durchlesen, dann im Quiz festigen.'),
+  h('div',{class:'filters'},SHEETS.map(s=>h('button',{class:'fchip',type:'button',style:{'--c':T[s.t].color},onclick:()=>document.getElementById('sh-'+s.id).scrollIntoView({behavior:'smooth'})},h('span',{class:'dot'}),s.title))),
+  SHEETS.map(s=>h('article',{class:'sheet',id:'sh-'+s.id,style:{'--c':T[s.t].color}},
+   h('h2',{class:'h3',style:{display:'flex',alignItems:'center',gap:'10px'}},h('span',{class:'dot'}),s.title),
+   h('p',{class:'note'},s.note),
+   h('div',{class:'tblbox',tabindex:'0',role:'region','aria-label':s.title},h('table',null,
+    h('thead',null,h('tr',null,s.head.map(x=>h('th',{scope:'col'},x)))),
+    h('tbody',null,s.rows.map(r=>h('tr',null,r.map(x=>h('td',null,x))))))))));
+};
+
+/* ───────── subnetting trainer ───────── */
+function ip2n(s){const p=String(s).trim().split('.');if(p.length!==4)return null;let n=0;for(let i=0;i<4;i++){if(!/^\d{1,3}$/.test(p[i])||+p[i]>255)return null;n=n*256+ +p[i];}return n;}
+function n2ip(n){return [Math.floor(n/16777216)%256,Math.floor(n/65536)%256,Math.floor(n/256)%256,n%256].join('.');}
+function maskOf(p){return p===0?0:(0xFFFFFFFF<<(32-p))>>>0;}
+function newTask(type){
+ if(type==='size'){
+  const need=[2,6,10,12,14,20,25,28,30,45,50,60,62,90,100,120,126,200,250,300,500,1000,2000][rnd(23)];
+  let hb=2;while(Math.pow(2,hb)-2<need)hb++;
+  const p=32-hb;
+  S.sub={type:type,need:need,hb:hb,p:p,ans:{prefix:'/'+p,mask:n2ip(maskOf(p)),hosts:String(Math.pow(2,hb)-2)},vals:{},checked:false};
+ }else{
+  const p=Math.random()<.75?24+rnd(7):17+rnd(7);
+  const base=[[10,rnd(256)],[172,16+rnd(16)],[192,168]][rnd(3)];
+  const ip=((base[0]*256+base[1])*256+rnd(256))*256+1+rnd(254);
+  const size=Math.pow(2,32-p),net=Math.floor(ip/size)*size,bc=net+size-1;
+  S.sub={type:'addr',ip:ip,p:p,net:net,bc:bc,size:size,ans:{net:n2ip(net),bc:n2ip(bc),first:n2ip(net+1),last:n2ip(bc-1),hosts:String(size-2),mask:n2ip(maskOf(p))},vals:{},checked:false};
+ }
+}
+function subSteps(t){
+ const c=x=>h('code',null,x);
+ if(t.type==='size')return [
+  h('li',null,'Gesucht ist die kleinste Zahl an Host-Bits h, für die 2^h − 2 mindestens ',c(t.need),' ergibt.'),
+  h('li',null,'Mit ',c(t.hb-1),' Host-Bits: 2^'+(t.hb-1)+' − 2 = ',c(Math.pow(2,t.hb-1)-2),' → zu wenig. Mit ',c(t.hb),' Host-Bits: 2^'+t.hb+' − 2 = ',c(Math.pow(2,t.hb)-2),' → reicht.'),
+  h('li',null,'Prefix = 32 − '+t.hb+' = ',c('/'+t.p),'. Als Maske geschrieben: ',c(t.ans.mask),'.')];
+ const mask=t.ans.mask.split('.').map(Number),ipo=n2ip(t.ip).split('.').map(Number),out=[];
+ out.push(h('li',null,c('/'+t.p),' heißt: die ersten '+t.p+' Bit sind der Netzanteil. Maske: ',c(t.ans.mask),'.'));
+ if(t.p%8===0){
+  out.push(h('li',null,'Die Maske endet genau an einer Oktettgrenze: Die ersten '+(t.p/8)+' Oktette sind Netz, der Rest sind Host-Bits. Netzadresse = Host-Teil auf 0, Broadcast = Host-Teil auf 255.'));
+ }else{
+  const i=Math.floor(t.p/8),blk=256-mask[i],lo=Math.floor(ipo[i]/blk)*blk;
+  out.push(h('li',null,'Das interessante Oktett ist Oktett '+(i+1)+' (Maskenwert ',c(mask[i]),'). Blockgröße = 256 − '+mask[i]+' = ',c(blk),'.'));
+  out.push(h('li',null,'Die Netze beginnen bei Vielfachen von '+blk+'. Der Wert ',c(ipo[i]),' liegt im Block ',c(lo+' – '+(lo+blk-1)),'.'));
+ }
+ out.push(h('li',null,'Netzadresse (alle Host-Bits 0): ',c(t.ans.net),'. Broadcast (alle Host-Bits 1, also eine Adresse vor dem nächsten Netz): ',c(t.ans.bc),'.'));
+ out.push(h('li',null,'Erster Host = Netzadresse + 1 = ',c(t.ans.first),'. Letzter Host = Broadcast − 1 = ',c(t.ans.last),'.'));
+ out.push(h('li',null,'Nutzbare Hosts = 2^'+(32-t.p)+' − 2 = ',c(Number(t.ans.hosts).toLocaleString('de-DE')),'.'));
+ return out;
+}
+VIEWS.subnet=function(){
+ if(!S.sub)newTask('addr');
+ const t=S.sub;
+ const fields=t.type==='size'?[['prefix','Prefix','/26'],['mask','Subnet mask','255.255.255.192'],['hosts','Usable hosts in that subnet','62']]
+  :[['net','Network address','192.168.1.0'],['bc','Broadcast address','192.168.1.255'],['first','First usable host','192.168.1.1'],['last','Last usable host','192.168.1.254'],['hosts','Usable hosts','254'],['mask','Subnet mask','255.255.255.0']];
+ const norm=(k,v)=>{v=String(v||'').trim();if(k==='hosts')return v.replace(/[.,\s']/g,'');if(k==='prefix')return '/'+v.replace(/^\//,'');return v.replace(/\s/g,'');};
+ const right=k=>norm(k,t.vals[k])===t.ans[k];
+ const check=()=>{t.checked=true;render();};
+ const allOk=t.checked&&fields.every(f=>right(f[0]));
+ return h('section',{class:'narrow',style:{paddingTop:'48px','--c':T.ip4.color}},
+  h('div',{class:'spread'},h('span',{class:'chip'},h('span',{class:'dot'}),'Subnetting trainer'),
+   h('div',{class:'seg',role:'group','aria-label':'Task type'},[['addr','Analyse an address'],['size','Size a subnet']].map(x=>h('button',{type:'button',class:t.type===x[0]?'on':'','aria-pressed':String(t.type===x[0]),onclick:()=>{newTask(x[0]);render();}},x[1])))),
+  t.type==='size'
+   ?[h('p',{class:'muted',style:{marginTop:'34px'}},'A subnet must hold this many hosts. Find the smallest subnet that fits.'),h('p',{class:'task'},t.need+' hosts')]
+   :[h('p',{class:'muted',style:{marginTop:'34px'}},'A host has this address. Work out everything about its subnet.'),h('p',{class:'task'},n2ip(t.ip)+' /'+t.p)],
+  h('form',{onsubmit:e=>{e.preventDefault();check();}},
+   h('div',{class:'fgrid'},fields.map(f=>{const ok=t.checked&&right(f[0]);return h('div',null,
+    h('label',{for:'f-'+f[0]},f[1]),
+    h('input',{class:'field'+(t.checked?(ok?' ok':' bad'):''),id:'f-'+f[0],type:'text',inputmode:f[0]==='hosts'?'numeric':'decimal',autocomplete:'off',spellcheck:'false',placeholder:'e.g. '+f[2],value:t.vals[f[0]]||'',oninput:e=>{t.vals[f[0]]=e.target.value;}}),
+    h('div',{class:'sol '+(ok?'ok':'bad'),role:t.checked?'status':null},t.checked?(ok?'Correct':'Correct: '+t.ans[f[0]]):''));})),
+   h('div',{class:'row'},
+    h('button',{class:'btn '+(t.checked?'dark':'primary'),type:'submit'},'Check'),
+    h('button',{class:'btn '+(t.checked?'primary':'dark'),type:'button',onclick:()=>{newTask(t.type);render();window.scrollTo(0,0);}},'New task'))),
+  t.checked?h('div',{class:'why',style:{marginTop:'28px'}},h('b',null,allOk?'Alles richtig. So kommt man darauf:':'Lösungsweg'),h('ol',{class:'steps'},subSteps(t))):
+   h('p',{class:'tiny',style:{marginTop:'24px'}},'Tipp: Die Subnet table in den Cheat sheets zeigt Maske und Blockgröße für jeden Prefix.'));
+};
+
+/* ───────── search & bookmarks ───────── */
+VIEWS.browse=function(){
+ const b=S.browse,all=questions(),list=h('div'),info=h('p',{class:'small muted',style:{marginBottom:'12px'},role:'status'}),filters=h('div',{class:'filters'});
+ function chips(){
+  const mk=(label,on,fn,color)=>h('button',{class:'fchip'+(on?' on':''),type:'button','aria-pressed':String(on),style:color?{'--c':color}:null,onclick:()=>{fn();chips();fill();}},color?h('span',{class:'dot'}):null,label);
+  filters.replaceChildren(
+   mk('Bookmarked',b.star,()=>{b.star=!b.star;}),
+   ...[['new','New'],['shaky','Shaky'],['known','Known']].map(x=>mk(x[1],b.status===x[0],()=>{b.status=b.status===x[0]?'':x[0];})),
+   ...TOPICS.filter(t=>all.some(q=>q.t===t.id)).map(t=>mk(t.name,b.topic===t.id,()=>{b.topic=b.topic===t.id?'':t.id;},t.color)));
+ }
+ function fill(){
+  const words=b.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const res=all.filter(q=>{
+   if(b.topic&&q.t!==b.topic)return false;if(b.status&&status(q)!==b.status)return false;if(b.star&&!stars[q.id])return false;
+   if(!words.length)return true;const hay=(q.q+' '+q.o.join(' ')+' '+(q.e||'')).toLowerCase();return words.every(w=>hay.indexOf(w)>=0);});
+  info.textContent=res.length+' of '+all.length+' questions';
+  list.replaceChildren(...res.map(q=>{
+   const t=T[q.t]||T.imp,open=b.open===q.id;
+   return h('div',{class:'item',style:{'--c':t.color}},
+    h('button',{class:'head',type:'button','aria-expanded':String(open),onclick:()=>{b.open=open?null:q.id;fill();}},h('span',{class:'dot'}),h('span',{class:'t'},q.q),stars[q.id]?h('span',{style:{color:'var(--warn)',display:'grid'}},icon('starOn')):null,pill(q)),
+    open?h('div',{class:'body'},imgs(q),
+     q.o.length?h('ul',null,q.o.map((o,i)=>{const ok=q.c.indexOf(i)>=0;return h('li',{class:ok?'ok':''},ok?'✓ ':'– ',o);})):null,
+     why(q),
+     h('div',{class:'row'},starBtn(q,fill),h('button',{class:'btn dark sm',type:'button',onclick:()=>startSession('quiz',{list:[q]})},'Quiz this question'))):null);
+  }));
+  if(!res.length)list.append(h('p',{class:'muted',style:{padding:'24px 0'}},'Nothing matches. Try fewer words or remove a filter.'));
+ }
+ chips();fill();
+ return h('section',{class:'narrow',style:{paddingTop:'8px'}},
+  h('h1',{class:'h2',style:{marginTop:'44px'}},'Search.'),
+  h('input',{class:'field',type:'search',placeholder:'Search questions, answers and explanations','aria-label':'Search questions',value:b.q,oninput:e=>{b.q=e.target.value;fill();}}),
+  filters,info,list);
+};
+
+/* ───────── import ───────── */
+function parseHtml(html){
+ const doc=new DOMParser().parseFromString(html,'text/html'),out=[];let cur=null;
+ const txt=el=>{const c=el.cloneNode(true);c.querySelectorAll('br').forEach(b=>b.replaceWith('\n'));c.querySelectorAll('script,style').forEach(b=>b.remove());return c.textContent.replace(/ /g,' ').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,'\n').trim();};
+ const red=el=>{const s=((el.getAttribute('style')||'')+';color:'+(el.getAttribute('color')||'')).toLowerCase().replace(/\s+/g,'');return /color:(red|#f00|#ff0000|rgb\(255,0,0\))(;|$)/.test(s);};
+ const liOk=li=>/correct/i.test(li.className||'')||!!li.querySelector('[class*="correct"]')||red(li)||Array.prototype.some.call(li.querySelectorAll('[style],font'),red);
+ const pics=el=>(el.tagName==='IMG'?[el]:Array.from(el.querySelectorAll('img'))).map(i=>i.getAttribute('src')||'').filter(s=>/^https:\/\//i.test(s));
+ const isBox=el=>/message_box|explan/i.test(typeof el.className==='string'?el.className:'');
+ (function walk(node){
+  for(const el of Array.from(node.children)){
+   const tag=el.tagName;
+   if(/^(SCRIPT|STYLE|NAV|FORM|HEADER|FOOTER|ASIDE|NOSCRIPT|IFRAME)$/.test(tag))continue;
+   if(isBox(el)){if(cur){const t=txt(el).replace(/^Explanation:?\s*/i,'');if(t)cur.e=(cur.e?cur.e+'\n':'')+t;cur.img.push(...pics(el));}continue;}
+   if(tag==='UL'||tag==='OL'){if(cur)for(const li of Array.from(el.children)){if(li.tagName!=='LI')continue;const t=txt(li);if(!t)continue;if(liOk(li))cur.c.push(cur.o.length);cur.o.push(t);}continue;}
+   if(tag==='TABLE'){if(cur){const rows=Array.from(el.querySelectorAll('tr')).map(r=>Array.from(r.children).map(txt).filter(Boolean).join(' → ')).filter(Boolean);if(rows.length)cur.e=(cur.e?cur.e+'\n':'')+rows.join('\n');cur.img.push(...pics(el));}continue;}
+   if(tag==='IMG'){if(cur)cur.img.push(...pics(el));continue;}
+   if(tag==='PRE'){if(cur&&!cur.o.length)cur.q+='\n'+txt(el);continue;}
+   if(tag==='P'){
+    const t=txt(el),m=/^(\d{1,3})\.\s+(\S[\s\S]*)$/.exec(t);
+    if(m){cur={q:m[2],o:[],c:[],e:'',img:pics(el)};out.push(cur);}
+    else if(cur){
+     /* an unnumbered paragraph after a finished answer list is another variant of the same question */
+     if(t&&cur.o.length){const same=t.length<40,b=cur.b||cur.q;cur={q:same?b:t,b:same?b:null,o:[],c:[],e:'',img:same?cur.img.slice():pics(el),v:1};out.push(cur);}
+     else{if(t&&!cur.o.length&&!cur.e)cur.q+='\n'+t;cur.img.push(...pics(el));}
+    }
+    continue;
+   }
+   if(/^H[1-6]$/.test(tag))continue;
+   walk(el);
+  }
+ })(doc.body);
+ for(let i=out.length-2;i>=0;i--)if(out[i+1].v&&!out[i].e)out[i].e=out[i+1].e;
+ const seen={};
+ return out.filter(q=>q.q.length>8&&!(q.v&&!q.o.length)).map(q=>({id:'i'+hash(q.q+'|'+q.o.join('|')),t:'imp',q:q.q,o:q.o,c:q.c,e:q.e,img:q.img.filter((s,i,a)=>a.indexOf(s)===i)})).filter(q=>seen[q.id]?false:(seen[q.id]=1));
+}
+VIEWS.import=function(){
+ const r=S.imp;
+ const zone=h('div',{class:'paste',contenteditable:'true',role:'textbox','aria-label':'Paste copied questions here',spellcheck:'false',
+  onpaste:e=>{e.preventDefault();const cd=e.clipboardData;const html=cd.getData('text/html');
+   if(!html){S.imp={err:'The clipboard only contained plain text, so the correct answers are not marked. Copy directly from the web page in your browser and paste again.'};}
+   else{const qs=parseHtml(html);S.imp=qs.length?{qs:qs}:{err:'No numbered questions were found in what you pasted.'};}
+   render();},
+  onbeforeinput:e=>{if(e.inputType&&e.inputType.indexOf('insertFromPaste')<0)e.preventDefault();}},'Click here, then paste (⌘V)');
+ return h('section',{class:'narrow',style:{paddingTop:'8px'}},
+  h('h1',{class:'h2',style:{marginTop:'44px'}},'Import questions.'),
+  h('p',{class:'muted'},'Bring in questions from a web page for your own private study. They are stored only in this browser.'),
+  h('ol',{class:'steps',style:{margin:'18px 0 24px'}},
+   h('li',null,'Open the page with the questions in your browser.'),
+   h('li',null,'Select everything (⌘A) and copy it (⌘C).'),
+   h('li',null,'Click the box below and paste (⌘V).')),
+  zone,
+  r&&r.err?h('p',{style:{color:'var(--bad)',marginTop:'16px'},role:'alert'},r.err):null,
+  r&&r.qs?h('div',{class:'card',style:{marginTop:'16px'}},
+   h('p',{class:'h3'},r.qs.length+' questions found'),
+   h('p',{class:'muted'},r.qs.filter(gradable).length+' with marked answers (usable in quiz and exam) · '+r.qs.filter(q=>!gradable(q)).length+' as reveal-only cards · '+r.qs.filter(q=>q.img.length).length+' with pictures (need an Internet connection)'),
+   h('div',{class:'row',style:{marginTop:'12px'}},
+    h('button',{class:'btn primary',type:'button',onclick:()=>{const ids={};imported.forEach(q=>ids[q.id]=1);imported=imported.concat(r.qs.filter(q=>!ids[q.id]));store.set('imported',imported);pool='all';store.set('pool',pool);S.imp=null;S.note='Imported. Your question pool now contains both sets.';go('home');}},'Add to my trainer'),
+    h('button',{class:'btn dark',type:'button',onclick:()=>{S.imp=null;render();}},'Discard'))):null,
+  imported.length?h('div',{class:'spread',style:{marginTop:'36px'}},h('span',{class:'muted'},imported.length+' imported questions are in your trainer.'),
+   h('button',{class:'btn dark sm',type:'button',onclick:()=>{if(confirm('Remove all imported questions?')){imported=[];pool='builtin';store.set('imported',imported);store.set('pool',pool);render();}}},'Remove imported')):null);
+};
+
+window.__ccna={parseHtml:parseHtml,BUILTIN:BUILTIN,go:go};
+render();
+})();
+
+</script>
+</body>
+</html>
